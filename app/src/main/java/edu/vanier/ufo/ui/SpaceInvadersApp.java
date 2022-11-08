@@ -7,6 +7,10 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 
 /**
+ * @author Karen & Koosoom 
+ */
+
+/**
  * The main driver of the game.
  *
  * @author cdea
