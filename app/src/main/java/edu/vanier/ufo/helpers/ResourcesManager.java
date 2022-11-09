@@ -1,6 +1,10 @@
 package edu.vanier.ufo.helpers;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -48,6 +52,41 @@ public class ResourcesManager {
         invaders.put(1, ResourcesManager.IMAGES_FOLDER + "large_invader_b.png");
         invaders.put(2, ResourcesManager.IMAGES_FOLDER + "small_invader_b.png");
         return invaders;
+    }
+    
+    /**
+     * 
+     * @param folderPath
+     * @param fileExtension
+     * @return 
+     */
+    public static List<String> getPathsOfSprites (String folderPath, String fileExtension){
+        List <String> fileNames = new ArrayList<> ();
+       
+        try{
+            
+            File invadersFolder = new File (folderPath);
+            
+            FilenameFilter filter = new FilenameFilter(){
+                @Override
+                public boolean accept (File f, String name){
+
+                    return name.endsWith(fileExtension); 
+                }
+            };
+            
+        /*File() files = invadersFolder.listFiles(filter); 
+        
+        for (File file : files){
+            fileNames.add(file.getName()); 
+        }
+        */
+        
+        }catch (Exception e){
+            System.err.println(e.getMessage());
+        }
+    
+        return fileNames; 
     }
 
 }
