@@ -151,6 +151,7 @@ public class Ship extends Sprite {
         // Load one image.
         Image shipImage;
         shipImage = new Image(ResourcesManager.SPACE_STAR_SHIP, true);
+     
         stopArea.setRadius(40);
         stopArea.setStroke(Color.ORANGE);
         RotatedShipImage prev = null;
@@ -181,8 +182,10 @@ public class Ship extends Sprite {
         // set javafx node to an image
         firstShip.setVisible(true);
         setNode(flipBook);
-        flipBook.setTranslateX(350);
-        flipBook.setTranslateY(450);
+       flipBook.setTranslateX(700);
+       flipBook.setTranslateY(700);
+       
+        
         flipBook.setCache(true);
         flipBook.setCacheHint(CacheHint.SPEED);
         flipBook.setManaged(false);

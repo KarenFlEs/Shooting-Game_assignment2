@@ -84,7 +84,7 @@ public abstract class GameEngine {
             // update actors
             updateSprites();
             // check for collision.
-             checkCollisions();
+            checkCollisions();
             // removed dead sprites.
             cleanupSprites();
         };
@@ -143,17 +143,27 @@ public abstract class GameEngine {
         // check each sprite against other sprite objects.
         for (Sprite spriteA : spriteManager.getCollisionsToCheck()) {
             for (Sprite spriteB : spriteManager.getAllSprites()) {
-               if (handleCollision(spriteA, spriteB)) {
-                 if (spriteA.collide(spriteB)) {
-                    ((Atom)spriteA).implode(this);
-                    ((Atom)spriteB).implode(this);
-                    getSpriteManager().addSpritesToBeRemoved(spriteA, spriteB);
-           
+                if (!spriteB.toString().contains("Ship")) {
+                    if (spriteA.toString().contains("Atom") && spriteB.toString().contains("Missile")) {
+                        if (handleCollision(spriteA, spriteB)) {
+
+                            // The break helps optimize the collisions
+                            //  The break statement means one object only hits another
+                            // object as opposed to one hitting many objects.
+                            // To be more accurate comment out the break statement.
+                            break;
+                        }
+                    }
+                } else {
+                    if (spriteA.toString().contains("Atom")) {
+                        if (handleCollision(spriteA, spriteB)) {
+                            break;
+                        }
+                    }
                 }
-              
-                }
-               
-            }     
+
+            }
+
         }
     }
 
@@ -166,16 +176,16 @@ public abstract class GameEngine {
      * @return boolean True if the objects collided, otherwise false.
      */
     protected boolean handleCollision(Sprite spriteA, Sprite spriteB) {
-       /* 
+        /* 
         if (spriteA.collide(spriteB)) {
             ((Atom)spriteA).implode(this);
             ((Atom)spriteB).implode(this);
             getSpriteManager().addSpritesToBeRemoved(spriteA, spriteB);
             return true;
         }
-        */
-       
-       return false;
+         */
+
+        return false;
     }
 
     /**

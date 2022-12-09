@@ -18,6 +18,18 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.util.Random;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import java.util.Random;
 import javafx.scene.image.ImageView;
 
 /**
@@ -75,9 +87,23 @@ public class GameWorld extends GameEngine {
         // Create a button to freeze the game loop.
         //final Timeline gameLoop = getGameLoop();
         getSpriteManager().addSprites(spaceShip);
+        
      
         getSceneNodes().getChildren().add(0, spaceShip.getNode());
         // mouse point
+        ImageView lifeView01 = new ImageView(new Image("/images/ship_life.gif"));
+        ImageView lifeView02 = new ImageView(new Image("/images/ship_life.gif"));
+        ImageView lifeView03 = new ImageView(new Image("/images/ship_life.gif"));
+        
+        
+        lifeView01.setFitHeight(50);
+        lifeView01.setFitWidth(50);
+        lifeView02.setFitHeight(50);
+        lifeView02.setFitWidth(50);
+        lifeView03.setFitHeight(50);
+        lifeView03.setFitWidth(50);
+        
+       
         VBox stats = new VBox();
 
         HBox row1 = new HBox();
@@ -88,6 +114,9 @@ public class GameWorld extends GameEngine {
         row2.getChildren().add(mousePressPtLabel);
         stats.getChildren().add(row1);
         stats.getChildren().add(row2);
+         HBox row3 = new HBox();
+        row3.getChildren().addAll(lifeView01, lifeView02, lifeView03);
+         stats.getChildren().add(row3);
         
         //TODO: Add the HUD here.
         getSceneNodes().getChildren().add(0, stats);
@@ -270,8 +299,6 @@ public class GameWorld extends GameEngine {
         }
     }
 
-    
-    
      /**
      * How to handle the collision of two sprite objects. Stops the particle by
      * zeroing out the velocity if a collision occurred.
@@ -283,18 +310,20 @@ public class GameWorld extends GameEngine {
      */
     @Override
     protected boolean handleCollision(Sprite spriteA, Sprite spriteB) {
-      /*  if (spriteA != spriteB) {
-            if (spriteA.collide(spriteB)) {
+       if (spriteA != spriteB) {
+            
+           if (spriteA.collide(spriteB)) {
 
                 if (spriteA != spaceShip) {
                     spriteA.handleDeath(this);
+                
                 }
                 if (spriteB != spaceShip) {
                     spriteB.handleDeath(this);
                 }
             }
         }
-*/
+
         return false;
     }
 }
