@@ -144,9 +144,13 @@ public abstract class GameEngine {
         for (Sprite spriteA : spriteManager.getCollisionsToCheck()) {
             for (Sprite spriteB : spriteManager.getAllSprites()) {
                if (handleCollision(spriteA, spriteB)) {
-         
-                   
-                    break;
+                 if (spriteA.collide(spriteB)) {
+                    ((Atom)spriteA).implode(this);
+                    ((Atom)spriteB).implode(this);
+                    getSpriteManager().addSpritesToBeRemoved(spriteA, spriteB);
+           
+                }
+              
                 }
                
             }     
