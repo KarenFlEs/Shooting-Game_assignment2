@@ -1,8 +1,6 @@
 package edu.vanier.ufo.engine;
 
-import edu.vanier.ufo.game.Atom;
-import edu.vanier.ufo.game.Missile;
-import edu.vanier.ufo.game.Ship;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -154,7 +152,8 @@ public abstract class GameEngine {
                             break;
                         }
                     }
-                } else {
+                } 
+                else {
                     if (spriteA.toString().contains("Atom")) {
                         if (handleCollision(spriteA, spriteB)) {
                             break;
