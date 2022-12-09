@@ -279,11 +279,36 @@ public class GameWorld extends GameEngine {
      * @param spriteB Sprite from the second list.
      * @return boolean returns a true if the two sprites have collided otherwise
      * false.
-     */
+     
     @Override
     protected boolean handleCollision(Sprite spriteA, Sprite spriteB) {
         //TODO: implement collision detection here.
 
+        return false;
+    }
+    */
+     /**
+     * How to handle the collision of two sprite objects. Stops the particle by
+     * zeroing out the velocity if a collision occurred.
+     *
+     * @param spriteA Sprite from the first list.
+     * @param spriteB Sprite from the second list.
+     * @return boolean returns a true if the two sprites have collided otherwise
+     * false.
+     */
+    @Override
+    protected boolean handleCollision(Sprite spriteA, Sprite spriteB) {
+        if (spriteA != spriteB) {
+            if (spriteA.collide(spriteB)) {
+
+                if (spriteA != spaceShip) {
+                    spriteA.handleDeath(this);
+                }
+                if (spriteB != spaceShip) {
+                    spriteB.handleDeath(this);
+                }
+            }
+        }
         return false;
     }
 }
