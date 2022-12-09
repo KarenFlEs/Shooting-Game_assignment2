@@ -75,6 +75,7 @@ public class GameWorld extends GameEngine {
         // Create a button to freeze the game loop.
         //final Timeline gameLoop = getGameLoop();
         getSpriteManager().addSprites(spaceShip);
+     
         getSceneNodes().getChildren().add(0, spaceShip.getNode());
         // mouse point
         VBox stats = new VBox();
@@ -269,24 +270,8 @@ public class GameWorld extends GameEngine {
         }
     }
 
-    /**
-     * How to handle the collision of two sprite objects. Stops the particle by
-     * zeroing out the velocity if a collision occurred. /** How to handle the
-     * collision of two sprite objects. Stops the particle by
-     *
-     *
-     * @param spriteA Sprite from the first list.
-     * @param spriteB Sprite from the second list.
-     * @return boolean returns a true if the two sprites have collided otherwise
-     * false.
-     
-    @Override
-    protected boolean handleCollision(Sprite spriteA, Sprite spriteB) {
-        //TODO: implement collision detection here.
-
-        return false;
-    }
-    */
+    
+    
      /**
      * How to handle the collision of two sprite objects. Stops the particle by
      * zeroing out the velocity if a collision occurred.
@@ -298,7 +283,7 @@ public class GameWorld extends GameEngine {
      */
     @Override
     protected boolean handleCollision(Sprite spriteA, Sprite spriteB) {
-        if (spriteA != spriteB) {
+      /*  if (spriteA != spriteB) {
             if (spriteA.collide(spriteB)) {
 
                 if (spriteA != spaceShip) {
@@ -309,6 +294,7 @@ public class GameWorld extends GameEngine {
                 }
             }
         }
+*/
         return false;
     }
 }
