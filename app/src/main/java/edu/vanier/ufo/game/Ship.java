@@ -154,6 +154,7 @@ public class Ship extends Sprite {
         stopArea.setRadius(40);
         stopArea.setStroke(Color.ORANGE);
         RotatedShipImage prev = null;
+      
 
         // create all the number of directions based on a unit angle. 360 divided by NUM_DIRECTIONS
         for (int i = 0; i < NUM_DIRECTIONS; i++) {

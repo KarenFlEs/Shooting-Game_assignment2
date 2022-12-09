@@ -1,5 +1,8 @@
 package edu.vanier.ufo.engine;
 
+import edu.vanier.ufo.game.Atom;
+import edu.vanier.ufo.game.Missile;
+import edu.vanier.ufo.game.Ship;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -140,14 +143,13 @@ public abstract class GameEngine {
         // check each sprite against other sprite objects.
         for (Sprite spriteA : spriteManager.getCollisionsToCheck()) {
             for (Sprite spriteB : spriteManager.getAllSprites()) {
-                if (handleCollision(spriteA, spriteB)) {
-                    // The break helps optimize the collisions
-                    //  The break statement means one object only hits another
-                    // object as opposed to one hitting many objects.
-                    // To be more accurate comment out the break statement.
+               if (handleCollision(spriteA, spriteB)) {
+         
+                   
                     break;
                 }
-            }
+               
+            }     
         }
     }
 
@@ -160,7 +162,16 @@ public abstract class GameEngine {
      * @return boolean True if the objects collided, otherwise false.
      */
     protected boolean handleCollision(Sprite spriteA, Sprite spriteB) {
-        return false;
+       /* 
+        if (spriteA.collide(spriteB)) {
+            ((Atom)spriteA).implode(this);
+            ((Atom)spriteB).implode(this);
+            getSpriteManager().addSpritesToBeRemoved(spriteA, spriteB);
+            return true;
+        }
+        */
+       
+       return false;
     }
 
     /**
