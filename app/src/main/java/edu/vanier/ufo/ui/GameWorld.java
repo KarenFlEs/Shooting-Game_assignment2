@@ -229,13 +229,15 @@ public class GameWorld extends GameEngine {
         //TODO: try the following window size options:
         //primaryStage.setFullScreen(true);
         //primaryStage.setMaximized(true);   
-
+       
         // Create the scene
         setSceneNodes(new Group());
-        setGameSurface(new Scene(getSceneNodes(), 1000, 600));
+        setGameSurface(new Scene(getSceneNodes(), 1000, 600) );
+        
 
         // Change the background of the main scene.
         getGameSurface().setFill(Color.BLACK);
+      
         // Setup Game input
         primaryStage.setScene(getGameSurface());
 
@@ -336,6 +338,32 @@ public class GameWorld extends GameEngine {
                 return;
             }
             spaceShip.changeWeapon(event.getCode());
+            
+            if(KeyCode.W==event.getCode()){
+                double positionX = spaceShip.getCenterX();
+                double positionY = (spaceShip.getCenterY()-100);
+                spaceShip.plotCourse(positionX, positionY, true);
+                
+            }
+            else if(KeyCode.S==event.getCode()){
+                double positionX = spaceShip.getCenterX();
+                double positionY = (spaceShip.getCenterY()+100);
+                spaceShip.plotCourse(positionX, positionY, true);
+                
+            }
+            else if(KeyCode.A==event.getCode()){
+                double positionX = (spaceShip.getCenterX()-100);
+                double positionY = (spaceShip.getCenterY());
+                spaceShip.plotCourse(positionX, positionY, true);
+                
+            }
+            else if(KeyCode.D==event.getCode()){
+                double positionX = (spaceShip.getCenterX()+100);
+                double positionY = (spaceShip.getCenterY());
+                spaceShip.plotCourse(positionX, positionY, true);
+                
+            }
+            
         };
         primaryStage.getScene().setOnKeyPressed(changeWeapons);
 
@@ -489,15 +517,17 @@ public class GameWorld extends GameEngine {
                     
                  
                 }
-               /* if(spriteA == spaceShip){
-                  
-             
-                }
                 
+           /*     if (spriteA.collide(spriteB)) {
+            ((Atom)spriteA).implode(this);
+            ((Atom)spriteB).implode(this);
+            getSpriteManager().addSpritesToBeRemoved(spriteA, spriteB);
+            return true;
+            }
+                if(spriteA == spaceShip){
+                }
                 if(spriteB == spaceShip){
                     spriteB.handleDeath(this);
-                    
-                   
                 }
                 */
            
