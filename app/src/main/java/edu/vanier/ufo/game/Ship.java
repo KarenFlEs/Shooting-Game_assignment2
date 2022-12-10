@@ -460,7 +460,9 @@ public class Ship extends Sprite {
             fireMissile = new Missile(ResourcesManager.ROCKET_FIRE);
             slowDownAmt = 1.3f;
             scaleBeginningMissle = 11;
-        } else {
+        } 
+        
+        else {
             fireMissile = new Missile(ResourcesManager.ROCKET_SMALL);
             scaleBeginningMissle = 8;
         }

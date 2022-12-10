@@ -19,6 +19,18 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.util.Random;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import java.util.Random;
+import javafx.scene.image.ImageView;
 
 /**
  * This is a simple game world simulating a bunch of spheres looking like atomic
@@ -70,10 +82,10 @@ public class GameWorld extends GameEngine {
         // Create the scene
         setSceneNodes(new Group());
         setGameSurface(new Scene(getSceneNodes(), 1000, 600) );
-        
 
         // Change the background of the main scene.
         getGameSurface().setFill(Color.BLACK);
+        
       
         // Setup Game input
         primaryStage.setScene(getGameSurface());
@@ -103,10 +115,8 @@ public class GameWorld extends GameEngine {
         lifeView03.setFitHeight(50);
         lifeView03.setFitWidth(50);
         
+        
        
-          //gameOver.setLayoutX(1000);
-         
-          //gameOver.setLayoutY(-1000);
 
         HBox row1 = new HBox();
        // HBox row4 = new HBox();
@@ -172,13 +182,17 @@ public class GameWorld extends GameEngine {
 
         // set up stats
         EventHandler changeWeapons = (EventHandler<KeyEvent>) (KeyEvent event) -> {
+            spaceShip.fire();
+            
             if (KeyCode.SPACE == event.getCode()) {
                 spaceShip.shieldToggle();
                 return;
             }
+            
             spaceShip.changeWeapon(event.getCode());
             
-            if(null!=event.getCode())switch (event.getCode()) {
+            if(null!=event.getCode())
+                switch (event.getCode()) {
                 case W -> {
                     double positionX = spaceShip.getCenterX();
                     double positionY = (spaceShip.getCenterY()-800);
@@ -202,8 +216,8 @@ public class GameWorld extends GameEngine {
                 default -> {
                 }
             }
-            
         };
+        
         primaryStage.getScene().setOnKeyPressed(changeWeapons);
 
         // set up stats
@@ -225,8 +239,8 @@ public class GameWorld extends GameEngine {
         Scene gameSurface = getGameSurface();
         for (int i = 0; i < numSpheres; i++) {
             //TODO: genereate different types of invader sprites. 
-           // Atom atom = new Atom(ResourcesManager.INVADER_SCI_FI);
-           Atom atom = new Atom(ResourcesManager.INVADER_SCI_FI);
+         //Atom atom = new Atom(ResourcesManager.);
+            Atom atom = new Atom(ResourcesManager.INVADER_UFO_GREEN);
             ImageView atomImage = atom.getImageViewNode();
             // random 0 to 2 + (.0 to 1) * random (1 or -1)
             // Randomize the location of each newly generated atom.
@@ -338,8 +352,8 @@ public class GameWorld extends GameEngine {
         levelLabel.setText("Level: " + value);
     }
     
-    /*public void updatScoreHud(int value){
-        lifeLabel.setText("Life: " + value);
+    public void updateScore(int value){
+         scoreLabel.setText("Score: " + score);
     }
      /*
      * How to handle the collision of two sprite objects. Stops the particle by
@@ -377,14 +391,15 @@ public class GameWorld extends GameEngine {
                     gameOver.setTranslateY(100);
                   
                     stats.getChildren().add(gameOver);
-                  
+                 // spaceShip.setNode(null);
                   
                     }
 
                 } 
                 else if (spriteB != spaceShip && (spriteA.toString().contains("Atom"))) {
-               score++;
-              scoreLabel.setText("Score: " + score);
+              // score++;
+              //scoreLabel.setText("Score: " + score);
+              updateScore(score++);
                     if ((spriteB.toString().contains("Missile"))) {
                         spriteA.handleDeath(this);
                    
