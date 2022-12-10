@@ -35,6 +35,7 @@ public class GameWorld extends GameEngine {
     Label mousePtLabel = new Label();
     // mouse press pt label
     Label mousePressPtLabel = new Label();
+    
     Ship spaceShip = new Ship();
     ImageView lifeView01 = new ImageView(new Image("/images/ship_life.gif"));;
     ImageView lifeView02 = new ImageView(new Image("/images/ship_life.gif"));;
@@ -45,8 +46,12 @@ public class GameWorld extends GameEngine {
     
     Label lifeLabel = new Label();
     Label levelLabel = new Label();
+    Label scoreLabel = new Label ();
+    HBox row4 = new HBox();
+    VBox stats = new VBox();
     
     int numLevel = 1;
+    int score = 0;
 
     public GameWorld(int fps, String title) {
         super(fps, title);
@@ -81,7 +86,7 @@ public class GameWorld extends GameEngine {
 
         // Create many spheres
         // TODO: change this. It must be implemented as a new game level.
-        generateManySpheres(5);
+        generateManySpheres(10);
 
         // Display the number of spheres visible.
         // Create a button to add more spheres.
@@ -102,23 +107,24 @@ public class GameWorld extends GameEngine {
         lifeView03.setFitWidth(50);
         
         
-        VBox stats = new VBox();
+       
 
         HBox row1 = new HBox();
        // HBox row4 = new HBox();
         //row4.getChildren().add(gameOver);
        
-        /* HBox row2 = new HBox();
-         lifeLabel.setText("LIFE LEFT: " + spaceShip.shipLives);
-         lifeLabel.setTextFill(Color.ALICEBLUE);
-        row2.getChildren().add(lifeLabel);
-        */
+         HBox row2 = new HBox();
+         scoreLabel.setText("Score: " + score);
+         scoreLabel.setTextFill(Color.ALICEBLUE);
+        row2.getChildren().add(scoreLabel);
+        
          HBox row3 = new HBox();
-         levelLabel.setTextFill(Color.ALICEBLUE);
-         levelLabel.setText("Level " + numLevel);
+        levelLabel.setTextFill(Color.ALICEBLUE);
+        levelLabel.setText("Level " + numLevel);
+        
         row3.getChildren().add(levelLabel);
         row1.getChildren().addAll(lifeView01, lifeView02, lifeView03);
-        stats.getChildren().addAll(row1,row3);
+        stats.getChildren().addAll(row1,row2,row3);
      
        //TODO: Add the HUD here.
         getSceneNodes().getChildren().add(0, stats);
@@ -336,9 +342,9 @@ public class GameWorld extends GameEngine {
     public void updateLvlHud(int value){
         levelLabel.setText("Level: " + value);
     }
-    /*
-    public void updateLifeHud(int value){
-        lifeLabel.setText("Life: " + value);
+    
+    public void updateScore(int value){
+         scoreLabel.setText("Score: " + score);
     }
     
     
@@ -353,38 +359,48 @@ public class GameWorld extends GameEngine {
      */
     @Override
     protected boolean handleCollision(Sprite spriteA, Sprite spriteB) {
-        
+        //Scene gameSurface = getGameSurface();
        if (spriteA != spriteB) {
             if (spriteA.collide(spriteB)) {
 
                 if (spriteA != spaceShip && !(spriteB.toString().contains("Missile") )) {
                     spriteA.handleDeath(this);
-                    spaceShip.shipLives--;
+                    
+                    spaceShip.lifeNumber--;
 
-                    if (spaceShip.shipLives == 2) {
+                    if (spaceShip.lifeNumber == 2) {
                     lifeView03.imageProperty().set(null);
                     }
-                    if (spaceShip.shipLives == 1) {
+                    if (spaceShip.lifeNumber == 1) {
                     lifeView02.imageProperty().set(null);
                     }
 
-                    if (spaceShip.shipLives == 0) {
-                      spriteB.handleDeath(this);
-                      lifeView01.imageProperty().set(null); 
+                    if (spaceShip.lifeNumber == 0) {
+                    spriteB.handleDeath(this);
+                    lifeView01.imageProperty().set(null);
+                    gameOver.setTranslateX(500);
+                    gameOver.setTranslateY(100);
+                  
+                    stats.getChildren().add(gameOver);
+                 // spaceShip.setNode(null);
+                  
                     }
 
                 } 
                 else if (spriteB != spaceShip && (spriteA.toString().contains("Atom"))) {
-                    //Invaders are atom
+              // score++;
+              //scoreLabel.setText("Score: " + score);
+                    updateScore(score++);
                     if ((spriteB.toString().contains("Missile"))) {
                         getSoundManager().playSound("explosion");
                         spriteA.handleDeath(this);
+                   
                     }
                 }
             }
         }  
        
-    
+    /*
        int counter = 1;
        
         if (!(spaceShip.shipLives == 0)) {
@@ -405,7 +421,7 @@ public class GameWorld extends GameEngine {
                     }
             }
         }
-
+*/
         return false;
 
     }
