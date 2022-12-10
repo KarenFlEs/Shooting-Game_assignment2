@@ -1,5 +1,4 @@
 package edu.vanier.ufo.ui;
-
 import edu.vanier.ufo.helpers.ResourcesManager;
 import edu.vanier.ufo.engine.*;
 import edu.vanier.ufo.game.*;
@@ -8,179 +7,7 @@ import javafx.scene.CacheHint;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -209,9 +36,14 @@ public class GameWorld extends GameEngine {
     // mouse press pt label
     Label mousePressPtLabel = new Label();
     Ship spaceShip = new Ship();
-    ImageView lifeView01;
-    ImageView lifeView02;
-    ImageView lifeView03;
+    ImageView lifeView01 = new ImageView(new Image("/images/ship_life.gif"));;
+    ImageView lifeView02 = new ImageView(new Image("/images/ship_life.gif"));;
+    ImageView lifeView03 =  new ImageView(new Image("/images/ship_life.gif"));
+    ImageView gameOver =  new ImageView(new Image("/images/game_over.gif"));
+    Label lifeLabel = new Label();
+    Label levelLabel = new Label();
+    
+    int numLevel = 1;
 
     public GameWorld(int fps, String title) {
         super(fps, title);
@@ -257,9 +89,7 @@ public class GameWorld extends GameEngine {
      
         getSceneNodes().getChildren().add(0, spaceShip.getNode());
         // mouse point
-        ImageView lifeView01 = new ImageView(new Image("/images/ship_life.gif"));
-        ImageView lifeView02 = new ImageView(new Image("/images/ship_life.gif"));
-        ImageView lifeView03 = new ImageView(new Image("/images/ship_life.gif"));
+       
        
         lifeView01.setFitHeight(50);
         lifeView01.setFitWidth(50);
@@ -272,21 +102,22 @@ public class GameWorld extends GameEngine {
         VBox stats = new VBox();
 
         HBox row1 = new HBox();
-       /* mousePtLabel.setTextFill(Color.WHITE);
-        row1.getChildren().add(mousePtLabel);
-      HBox row2 = new HBox();
-        mousePressPtLabel.setTextFill(Color.WHITE);
-        row2.getChildren().add(mousePressPtLabel);
-        stats.getChildren().add(row1);
-        stats.getChildren().add(row2);
-         HBox row3 = new HBox();
+       // HBox row4 = new HBox();
+        //row4.getChildren().add(gameOver);
+       
+        /* HBox row2 = new HBox();
+         lifeLabel.setText("LIFE LEFT: " + spaceShip.shipLives);
+         lifeLabel.setTextFill(Color.ALICEBLUE);
+        row2.getChildren().add(lifeLabel);
         */
-        
+         HBox row3 = new HBox();
+         levelLabel.setTextFill(Color.ALICEBLUE);
+         levelLabel.setText("Level " + numLevel);
+        row3.getChildren().add(levelLabel);
         row1.getChildren().addAll(lifeView01, lifeView02, lifeView03);
-        stats.getChildren().add(row1);
-      
-        
-        //TODO: Add the HUD here.
+        stats.getChildren().addAll(row1,row3);
+     
+       //TODO: Add the HUD here.
         getSceneNodes().getChildren().add(0, stats);
 
 
@@ -339,29 +170,29 @@ public class GameWorld extends GameEngine {
             }
             spaceShip.changeWeapon(event.getCode());
             
-            if(KeyCode.W==event.getCode()){
-                double positionX = spaceShip.getCenterX();
-                double positionY = (spaceShip.getCenterY()-100);
-                spaceShip.plotCourse(positionX, positionY, true);
-                
-            }
-            else if(KeyCode.S==event.getCode()){
-                double positionX = spaceShip.getCenterX();
-                double positionY = (spaceShip.getCenterY()+100);
-                spaceShip.plotCourse(positionX, positionY, true);
-                
-            }
-            else if(KeyCode.A==event.getCode()){
-                double positionX = (spaceShip.getCenterX()-100);
-                double positionY = (spaceShip.getCenterY());
-                spaceShip.plotCourse(positionX, positionY, true);
-                
-            }
-            else if(KeyCode.D==event.getCode()){
-                double positionX = (spaceShip.getCenterX()+100);
-                double positionY = (spaceShip.getCenterY());
-                spaceShip.plotCourse(positionX, positionY, true);
-                
+            if(null!=event.getCode())switch (event.getCode()) {
+                case W -> {
+                    double positionX = spaceShip.getCenterX();
+                    double positionY = (spaceShip.getCenterY()-800);
+                    spaceShip.plotCourse(positionX, positionY, true);
+                    }
+                case S -> {
+                    double positionX = spaceShip.getCenterX();
+                    double positionY = (spaceShip.getCenterY()+800);
+                    spaceShip.plotCourse(positionX, positionY, true);
+                    }
+                case A -> {
+                    double positionX = (spaceShip.getCenterX()-800);
+                    double positionY = (spaceShip.getCenterY());
+                    spaceShip.plotCourse(positionX, positionY, true);
+                    }
+                case D -> {
+                    double positionX = (spaceShip.getCenterX()+800);
+                    double positionY = (spaceShip.getCenterY());
+                    spaceShip.plotCourse(positionX, positionY, true);
+                    }
+                default -> {
+                }
             }
             
         };
@@ -493,6 +324,14 @@ public class GameWorld extends GameEngine {
         }
     }
 
+    
+    public void updateLvlHud(int value){
+        levelLabel.setText("Level: " + value);
+    }
+    /*
+    public void updateLifeHud(int value){
+        lifeLabel.setText("Life: " + value);
+    }
      /**
      * How to handle the collision of two sprite objects. Stops the particle by
      * zeroing out the velocity if a collision occurred.
@@ -504,36 +343,69 @@ public class GameWorld extends GameEngine {
      */
     @Override
     protected boolean handleCollision(Sprite spriteA, Sprite spriteB) {
+        
        if (spriteA != spriteB) {
-            
-           if (spriteA.collide(spriteB)) {
+            if (spriteA.collide(spriteB)) {
 
-                if (spriteA != spaceShip) {
+                if (spriteA != spaceShip && !(spriteB.toString().contains("Missile") )) {
+
                     spriteA.handleDeath(this);
-                 
-                }
-                if (spriteB != spaceShip) {
-                    spriteB.handleDeath(this);
+                    spaceShip.shipLives--;
+
+                    if (spaceShip.shipLives == 2) {
+                    lifeView03.imageProperty().set(null);
                     
-                 
-                }
+                    }
+                    if (spaceShip.shipLives == 1) {
+                    lifeView02.imageProperty().set(null);
                 
-           /*     if (spriteA.collide(spriteB)) {
-            ((Atom)spriteA).implode(this);
-            ((Atom)spriteB).implode(this);
-            getSpriteManager().addSpritesToBeRemoved(spriteA, spriteB);
-            return true;
-            }
-                if(spriteA == spaceShip){
+                    }
+
+                    if (spaceShip.shipLives == 0) {
+                      spriteB.handleDeath(this);
+                      lifeView01.imageProperty().set(null); 
+                    }
+
+                } 
+                else if (spriteB != spaceShip && (spriteA.toString().contains("Atom"))) {
+
+                    if ((spriteB.toString().contains("Missile"))) {
+                        spriteA.handleDeath(this);
+                    }
                 }
-                if(spriteB == spaceShip){
-                    spriteB.handleDeath(this);
-                }
-                */
-           
             }
+        }  
+       
+    
+       int counter = 1;
+       
+        if (!(spaceShip.shipLives == 0)) {
+
+             
+            if (this.getSpriteManager().getAllSprites().size()==2) {
+
+                if (counter == 1) {
+                    
+                    numLevel = 2;
+                    updateLvlHud(2);
+                    generateManySpheres(15);
+                    counter++;
+
+                } 
+                    
+                    else if (counter == 2) {
+                  
+                    numLevel = 3;
+                    updateLvlHud(3);
+                    generateManySpheres(20);
+                    
+                    }
+            }
+
         }
 
         return false;
+
     }
+
 }
