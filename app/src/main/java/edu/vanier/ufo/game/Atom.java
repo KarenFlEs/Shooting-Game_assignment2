@@ -1,7 +1,6 @@
 package edu.vanier.ufo.game;
 
-import edu.vanier.ufo.engine.GameEngine;
-import edu.vanier.ufo.engine.Sprite;
+import edu.vanier.ufo.engine.*;
 import edu.vanier.ufo.helpers.ResourcesManager;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -60,14 +59,19 @@ public class Atom extends Sprite {
         vX = vY = 0;
         Node currentNode = getNode();
         /* TODO: fix this code to add explosing effect*/
-        //Sprite explosion = new Atom(ResourcesManager.ROCKET_FIRE);                
-        //gameWorld.getSceneNodes().getChildren().add(explosion.getNode());
+      
+        Sprite explosion = new Atom(ResourcesManager.EXPLOSION);   
+        explosion.getNode().setTranslateX(currentNode.getTranslateX()+vX);
+        explosion.getNode().setTranslateY(currentNode.getTranslateY()+vY);
+       
+        gameWorld.getSceneNodes().getChildren().add(explosion.getNode());
+        
         FadeTransition ft = new FadeTransition(Duration.millis(300), currentNode);
         ft.setFromValue(vX);
         ft.setToValue(0);
         ft.setOnFinished((ActionEvent event) -> {
             isDead = true;
-            gameWorld.getSceneNodes().getChildren().remove(currentNode);
+            gameWorld.getSceneNodes().getChildren().removeAll(currentNode, explosion.getNode());
         });
         ft.play();
     }

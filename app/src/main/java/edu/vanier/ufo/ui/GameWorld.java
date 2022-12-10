@@ -19,18 +19,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.util.Random;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.ImageView;
 
 /**
  * This is a simple game world simulating a bunch of spheres looking like atomic
@@ -52,6 +40,9 @@ public class GameWorld extends GameEngine {
     ImageView lifeView02 = new ImageView(new Image("/images/ship_life.gif"));;
     ImageView lifeView03 =  new ImageView(new Image("/images/ship_life.gif"));
     ImageView gameOver =  new ImageView(new Image("/images/game_over.gif"));
+    
+    //ImageView imvBackground1 = new ImageView("/images/space-background1.jpg"); 
+    
     Label lifeLabel = new Label();
     Label levelLabel = new Label();
     
@@ -80,7 +71,7 @@ public class GameWorld extends GameEngine {
 
         // Change the background of the main scene.
         getGameSurface().setFill(Color.BLACK);
-        
+        //getSceneNodes().getChildren().add(imvBackground1);
       
         // Setup Game input
         primaryStage.setScene(getGameSurface());
@@ -135,6 +126,7 @@ public class GameWorld extends GameEngine {
 
         // load sound files
         getSoundManager().loadSoundEffects("laser", getClass().getClassLoader().getResource(ResourcesManager.SOUND_LASER));
+        getSoundManager().loadSoundEffects("explosion", getClass().getClassLoader().getResource(ResourcesManager.SOUND_EXPLOSION));
     }
 
     /**
@@ -148,7 +140,6 @@ public class GameWorld extends GameEngine {
         EventHandler fireOrMove = (EventHandler<MouseEvent>) (MouseEvent event) -> {
             mousePressPtLabel.setText("Mouse Press PT = (" + event.getX() + ", " + event.getY() + ")");
             if (event.getButton() == MouseButton.PRIMARY) {
-
                 // Aim
                 spaceShip.plotCourse(event.getX(), event.getY(), false);
 
@@ -158,7 +149,7 @@ public class GameWorld extends GameEngine {
 
                 // play sound
                 getSoundManager().playSound("laser");
-
+                
                 getSceneNodes().getChildren().add(0, missile.getNode());
 
             } else if (event.getButton() == MouseButton.SECONDARY) {
@@ -349,6 +340,8 @@ public class GameWorld extends GameEngine {
     public void updateLifeHud(int value){
         lifeLabel.setText("Life: " + value);
     }
+    
+    
      /**
      * How to handle the collision of two sprite objects. Stops the particle by
      * zeroing out the velocity if a collision occurred.
@@ -365,17 +358,14 @@ public class GameWorld extends GameEngine {
             if (spriteA.collide(spriteB)) {
 
                 if (spriteA != spaceShip && !(spriteB.toString().contains("Missile") )) {
-
                     spriteA.handleDeath(this);
                     spaceShip.shipLives--;
 
                     if (spaceShip.shipLives == 2) {
                     lifeView03.imageProperty().set(null);
-                    
                     }
                     if (spaceShip.shipLives == 1) {
                     lifeView02.imageProperty().set(null);
-                
                     }
 
                     if (spaceShip.shipLives == 0) {
@@ -385,8 +375,9 @@ public class GameWorld extends GameEngine {
 
                 } 
                 else if (spriteB != spaceShip && (spriteA.toString().contains("Atom"))) {
-
+                    //Invaders are atom
                     if ((spriteB.toString().contains("Missile"))) {
+                        getSoundManager().playSound("explosion");
                         spriteA.handleDeath(this);
                     }
                 }
@@ -397,28 +388,22 @@ public class GameWorld extends GameEngine {
        int counter = 1;
        
         if (!(spaceShip.shipLives == 0)) {
-
-             
+            
             if (this.getSpriteManager().getAllSprites().size()==2) {
 
                 if (counter == 1) {
-                    
                     numLevel = 2;
                     updateLvlHud(2);
                     generateManySpheres(15);
                     counter++;
-
                 } 
                     
                     else if (counter == 2) {
-                  
-                    numLevel = 3;
-                    updateLvlHud(3);
-                    generateManySpheres(20);
-                    
+                        numLevel = 3;
+                        updateLvlHud(3);
+                        generateManySpheres(20);
                     }
             }
-
         }
 
         return false;
