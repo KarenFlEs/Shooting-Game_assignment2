@@ -84,8 +84,9 @@ public class GameWorld extends GameEngine {
 
         // Create many spheres
         // TODO: change this. It must be implemented as a new game level.
-        generateManySpheres(10,0);
-
+        //generateManySpheres(10,0);
+        newLevel(); 
+            
         // Display the number of spheres visible.
         // Create a button to add more spheres.
         // Create a button to freeze the game loop.
@@ -95,28 +96,23 @@ public class GameWorld extends GameEngine {
      
         getSceneNodes().getChildren().add(0, spaceShip.getNode());
         // mouse point
-       
-       
         lifeView01.setFitHeight(50);
         lifeView01.setFitWidth(50);
         lifeView02.setFitHeight(50);
         lifeView02.setFitWidth(50);
         lifeView03.setFitHeight(50);
         lifeView03.setFitWidth(50);
-        
-        
-       
 
         HBox row1 = new HBox();
        // HBox row4 = new HBox();
         //row4.getChildren().add(gameOver);
        
-         HBox row2 = new HBox();
-         scoreLabel.setText("Score: " + score);
-         scoreLabel.setTextFill(Color.ALICEBLUE);
+        HBox row2 = new HBox();
+        scoreLabel.setText("Score: " + score);
+        scoreLabel.setTextFill(Color.ALICEBLUE);
         row2.getChildren().add(scoreLabel);
         
-         HBox row3 = new HBox();
+        HBox row3 = new HBox();
         levelLabel.setTextFill(Color.ALICEBLUE);
         levelLabel.setText("Level: " + numLevel);
         
@@ -127,10 +123,10 @@ public class GameWorld extends GameEngine {
        //TODO: Add the HUD here.
         getSceneNodes().getChildren().add(0, stats);
 
-
         // load sound files
         getSoundManager().loadSoundEffects("laser", getClass().getClassLoader().getResource(ResourcesManager.SOUND_LASER));
         getSoundManager().loadSoundEffects("explosion", getClass().getClassLoader().getResource(ResourcesManager.SOUND_EXPLOSION));
+        
     }
 
     /**
@@ -344,7 +340,6 @@ public class GameWorld extends GameEngine {
             getSceneNodes().getChildren().remove(missile.getNode());
         }
     }
-
     
     public void updateLvlHud(int value){
         levelLabel.setText("Level: " + value);
@@ -366,14 +361,12 @@ public class GameWorld extends GameEngine {
      */
     @Override
     protected boolean handleCollision(Sprite spriteA, Sprite spriteB) {
-        //Scene gameSurface = getGameSurface();
         
        if (spriteA != spriteB) {
             if (spriteA.collide(spriteB)) {
 
                 if (spriteA != spaceShip && !(spriteB instanceof Atom )) {
                     spriteA.handleDeath(this);
-                    
                     spaceShip.lifeNumber--;
 
                     if (spaceShip.lifeNumber == 2) {
@@ -382,70 +375,98 @@ public class GameWorld extends GameEngine {
                     if (spaceShip.lifeNumber == 1) {
                     lifeView02.imageProperty().set(null);
                     }
-
                     if (spaceShip.lifeNumber == 0) {
                     spriteB.handleDeath(this);
                     lifeView01.imageProperty().set(null);
-                    gameOver.setTranslateX(500);
+                    gameOver.setTranslateX(700);
                     gameOver.setTranslateY(100);
-                  
-                   stats.getChildren().add(gameOver);
-                
-                  
+                    //stats.getChildren().clear();
+                    getSceneNodes().getChildren().clear();
+                    getSceneNodes().getChildren().add(gameOver);
                     }
-
                 } 
+                
                 else if (spriteB != spaceShip && (spriteA instanceof Atom ) ) {
-              if((spaceShip.lifeNumber != 0) ){
-                    if (spriteB instanceof Missile ) {
-                        getSoundManager().playSound("explosion");
-                        spriteA.handleDeath(this);
-                   
+                    if((spaceShip.lifeNumber != 0) ){
+                        if (spriteB instanceof Missile ) {
+                            getSoundManager().playSound("explosion");
+                            spriteA.handleDeath(this);
+                        }
+                        updateScore(score++); 
+                        
+                        if (score == 10){
+                            //System.out.println(getSceneNodes().getChildren().contains("Atom"));
+                            
+                            numLevel++; 
+                            newLevel(); 
+                        }
                     }
-                   updateScore(score++); 
-              }
-                    
+                    //int counter =1;
                 }
-                
-               int counter =1;
-               
-    if((spaceShip.lifeNumber != 0)){
-       // Random rnd = new Random();
-       
-       
-        if(this.getSpriteManager().getAllSprites().size()==2){
-        if (counter==1) {
-            updateLvlHud(2);
-            generateManySpheres(15,1.5);
-        spaceShip.changeShip("/images/spaceShips_004.png");
-        counter++;
-        
-        }   
-        
-              if (counter==2) {
-             updateLvlHud(3);
-              generateManySpheres(20,3.0);
-              spaceShip.changeShip("/images/spaceShips_007.png");
-           counter++;
-        }     
-              
-        if (counter==3) {
-            
-            gameWin.setFitWidth(700);
-            gameWin.setTranslateX(400);
-            gameWin.setTranslateY(200);
-                  
-             stats.getChildren().add(gameWin);
+            return true; 
+            }
              
-             
-            } 
-
-                
-        
+    
        }
+    return false; 
+}
+         
+    public void newLevel(){
+        if (numLevel == 1){
+            generateManySpheres(10,1.5);
+        }
+        
+        if (numLevel == 2){
+            updateLvlHud(2);
+            generateManySpheres(20,3.0);
+            spaceShip.changeShip("/images/spaceShips_007.png");
+        }
+        
+        if (numLevel == 3){
+            generateManySpheres(40,3.0);
+            spaceShip.changeShip("/images/newSpaceShips/spaceShips_004.png");
+            updateLvlHud(3);
+                gameWin.setFitWidth(700);
+                gameWin.setTranslateX(400);
+                gameWin.setTranslateY(200);
+                getSceneNodes().getChildren().add(gameWin);
+            
+        }
+    
+    /*
+        if((spaceShip.lifeNumber != 0)){
+           // Random rnd = new Random();
+
+            if(this.getSpriteManager().getAllSprites().size()==2){
+            if (counter==1) {
+                updateLvlHud(2);
+                generateManySpheres(15,1.5);
+            spaceShip.changeShip("/images/spaceShips_004.png");
+            counter++;
+
+            }   
+
+                  if (counter==2) {
+                 updateLvlHud(3);
+                  generateManySpheres(20,3.0);
+                  spaceShip.changeShip("/images/spaceShips_007.png");
+               counter++;
+            }     
+
+            if (counter==3) {
+
+                gameWin.setFitWidth(700);
+                gameWin.setTranslateX(400);
+                gameWin.setTranslateY(200);
+
+                 stats.getChildren().add(gameWin);
+                } 
+
+
+
+           }
     }
             }
-            
             
             
        }  
@@ -454,7 +475,7 @@ public class GameWorld extends GameEngine {
             }
 
         
-
-        
-
+*/
+    }
 }
+        
