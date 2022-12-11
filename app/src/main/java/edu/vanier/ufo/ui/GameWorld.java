@@ -7,18 +7,7 @@ import javafx.scene.CacheHint;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;;
-import javafx.scene.image.Image;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.ImageView;
+
 import javafx.scene.image.Image;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
@@ -53,6 +42,7 @@ public class GameWorld extends GameEngine {
     ImageView lifeView02 = new ImageView(new Image("/images/ship_life.gif"));;
     ImageView lifeView03 =  new ImageView(new Image("/images/ship_life.gif"));
     ImageView gameOver =  new ImageView(new Image("/images/game_over.gif"));
+    ImageView gameWin =  new ImageView(new Image("/images/win_display.png"));
     Label lifeLabel = new Label();
     Label levelLabel = new Label();
     Label scoreLabel = new Label ();
@@ -95,7 +85,7 @@ public class GameWorld extends GameEngine {
 
         // Create many spheres
         // TODO: change this. It must be implemented as a new game level.
-        generateManySpheres(10);
+        generateManySpheres(10,0);
 
         // Display the number of spheres visible.
         // Create a button to add more spheres.
@@ -129,11 +119,11 @@ public class GameWorld extends GameEngine {
         
          HBox row3 = new HBox();
         levelLabel.setTextFill(Color.ALICEBLUE);
-        levelLabel.setText("Level " + numLevel);
+        levelLabel.setText("Level: " + numLevel);
         
         row3.getChildren().add(levelLabel);
         row1.getChildren().addAll(lifeView01, lifeView02, lifeView03);
-        stats.getChildren().addAll(row1,row2,row3);
+        stats.getChildren().addAll(row2,row3,row1);
      
        //TODO: Add the HUD here.
         getSceneNodes().getChildren().add(0, stats);
@@ -234,18 +224,20 @@ public class GameWorld extends GameEngine {
      * @param numSpheres The number of random sized, color, and velocity atoms
      * to generate.
      */
-    private void generateManySpheres(int numSpheres) {
+    private void generateManySpheres(int numSpheres, double x) {
         Random rnd = new Random();
         Scene gameSurface = getGameSurface();
         for (int i = 0; i < numSpheres; i++) {
             //TODO: genereate different types of invader sprites. 
-         //Atom atom = new Atom(ResourcesManager.);
+         
             Atom atom = new Atom(ResourcesManager.INVADER_UFO_GREEN);
             ImageView atomImage = atom.getImageViewNode();
             // random 0 to 2 + (.0 to 1) * random (1 or -1)
-            // Randomize the location of each newly generated atom.
-            atom.setVelocityX((rnd.nextInt(2) + rnd.nextDouble()) * (rnd.nextBoolean() ? 1 : -1));
-            atom.setVelocityY((rnd.nextInt(2) + rnd.nextDouble()) * (rnd.nextBoolean() ? 1 : -1));
+            // Randomize the location of each newly generated atom
+            
+            atom.setVelocityX((((rnd.nextInt(2) + rnd.nextDouble()) * (rnd.nextBoolean() ? 1 : -1))));
+             atom.setVelocityY((((rnd.nextInt(2) + rnd.nextDouble()) * (rnd.nextBoolean() ? 1 : -1))));
+            //atom.setVelocityY((rnd.nextInt(2) + rnd.nextDouble()) * (rnd.nextBoolean() ? 1 : -1));
 
             // random x between 0 to width of scene
             double newX = rnd.nextInt((int) gameSurface.getWidth() - 100);
@@ -390,54 +382,66 @@ public class GameWorld extends GameEngine {
                     gameOver.setTranslateX(500);
                     gameOver.setTranslateY(100);
                   
-                    stats.getChildren().add(gameOver);
-                 // spaceShip.setNode(null);
+                   stats.getChildren().add(gameOver);
+                
                   
                     }
 
                 } 
-                else if (spriteB != spaceShip && (spriteA.toString().contains("Atom"))) {
-              // score++;
-              //scoreLabel.setText("Score: " + score);
-              updateScore(score++);
+                else if (spriteB != spaceShip && (spriteA.toString().contains("Atom")) && !(spaceShip.lifeNumber == 0) ) {
+              
                     if ((spriteB.toString().contains("Missile"))) {
                         spriteA.handleDeath(this);
                    
                     }
+                   updateScore(score++); 
+                    
                 }
-            }
-        }  
+                
+               //int counter =1;
+    if(!(spaceShip.lifeNumber == 0)){
+       // Random rnd = new Random();
        
-    /*
-       int counter = 1;
-       
-        if (!(spaceShip.shipLives == 0)) {
-
-             
-            if (this.getSpriteManager().getAllSprites().size()==2) {
-
-                if (counter == 1) {
-                    
-                    numLevel = 2;
-                    updateLvlHud(2);
-                    generateManySpheres(15);
-                    counter++;
-
-                } 
-                    
-                    else if (counter == 2) {
+        
+        if (score == 10-(3-spaceShip.lifeNumber)) {
+            updateLvlHud(2);
+            generateManySpheres(15,1.5);
+        spaceShip.changeShip("/images/spaceShips_004.png");
+        
+        }   
+        
+              if (score == 25) {
+             updateLvlHud(3);
+              generateManySpheres(20,3.0);
+              spaceShip.changeShip("/images/spaceShips_007.png");
+           
+        }     
+              
+        /*if (score == 45) {
+            
+            gameWin.setFitWidth(700);
+            gameWin.setTranslateX(400);
+            gameWin.setTranslateY(200);
                   
-                    numLevel = 3;
-                    updateLvlHud(3);
-                    generateManySpheres(20);
-                    
-                    }
+             stats.getChildren().add(gameWin);
+             
+             
+            } 
+*/
+                
+        
+       }
+            }
+            
+            
+            
+       }  
+     
+        return false;
             }
 
-        }
-*/
-        return false;
+        
 
-    }
+        
 
 }

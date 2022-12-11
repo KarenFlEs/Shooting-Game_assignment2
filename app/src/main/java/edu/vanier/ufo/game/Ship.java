@@ -30,6 +30,7 @@ public class Ship extends Sprite {
      * 360 degree turn
      */
     public int lifeNumber = 3;
+   
     private final static int TWO_PI_DEGREES = 360;
 
     /**
