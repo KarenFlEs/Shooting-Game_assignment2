@@ -228,10 +228,16 @@ public class GameWorld extends GameEngine {
     private void generateManySpheres(int numSpheres) {
         Random rnd = new Random();
         Scene gameSurface = getGameSurface();
+        String strInvaders = " ";
+        
         for (int i = 0; i < numSpheres; i++) {
+            
             //TODO: genereate different types of invader sprites. 
-         //Atom atom = new Atom(ResourcesManager.);
-            Atom atom = new Atom(ResourcesManager.INVADER_UFO_GREEN);
+            int a = rnd.nextInt(5);
+            strInvaders = ResourcesManager.getInvaderSprites().get(a);
+            
+            Atom atom = new Atom(strInvaders);
+           // Atom atom = new Atom("images/newInvaders/ufo-pink.png");
             ImageView atomImage = atom.getImageViewNode();
             // random 0 to 2 + (.0 to 1) * random (1 or -1)
             // Randomize the location of each newly generated atom.
@@ -266,6 +272,7 @@ public class GameWorld extends GameEngine {
 
             // add sprite's 
             getSceneNodes().getChildren().add(atom.getNode());
+        
         }
     }
 
