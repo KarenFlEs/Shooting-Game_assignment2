@@ -396,10 +396,21 @@ public class GameWorld extends GameEngine {
                         
                         if (score == 10){
                             //System.out.println(getSceneNodes().getChildren().contains("Atom"));
-                            
                             numLevel++; 
                             newLevel(); 
                         }
+                         if (score == 30){
+                            //System.out.println(getSceneNodes().getChildren().contains("Atom"));
+                            numLevel++; 
+                            newLevel(); 
+                        }
+                        if (score == 60){
+                            //System.out.println(getSceneNodes().getChildren().contains("Atom"));
+                            numLevel++; 
+                            newLevel(); 
+                        }
+                        
+                        
                     }
                     //int counter =1;
                 }
@@ -423,7 +434,7 @@ public class GameWorld extends GameEngine {
         }
         
         if (numLevel == 3){
-            generateManySpheres(40,3.0);
+            generateManySpheres(30,3.0);
             spaceShip.changeShip("/images/newSpaceShips/spaceShips_004.png");
             updateLvlHud(3);
                 gameWin.setFitWidth(700);
