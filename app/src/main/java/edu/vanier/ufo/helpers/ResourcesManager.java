@@ -31,14 +31,18 @@ public class ResourcesManager {
     public static final String ROCKET_SMALL = IMAGES_FOLDER + "rocket2.png";
     public static final String ROCKET_FIRE = IMAGES_FOLDER + "light-missile.png";
 
-    // Invader sprites.
+    public static final String EXPLOSION = IMAGES_FOLDER + "explosion2.gif";
     
+    // Invader sprites.
     private static final String NEWINVADERS_IMAGES_FOLDER = RESOURCES_FOLDER + "images/newInvaders/";
     
     public static final String INVADER_UFO_GREEN = NEWINVADERS_IMAGES_FOLDER + "ufo-green.png"; 
     public static final String INVADER_UFO_PINK = NEWINVADERS_IMAGES_FOLDER + "ufo-pink.png"; 
     public static final String INVADER_JELLYMONSTER = NEWINVADERS_IMAGES_FOLDER + "invader-JellyMonster.png"; 
-    public static final String INVADER_FLYMONSTER = NEWINVADERS_IMAGES_FOLDER + "invader-flyMonster"; 
+   // public static final String INVADER_FLYMONSTER = NEWINVADERS_IMAGES_FOLDER + "invader-flyMonster"; 
+    
+    public static final String INVADER_YELLOW_MONSTER = NEWINVADERS_IMAGES_FOLDER + "invader-YellowMonster.png";
+    public static final String INVADER_GREEN_MONSTER = NEWINVADERS_IMAGES_FOLDER + "invader-GreenMonster.png";
     
     /*
     public static final String INVADER_LARGE_SHIP = IMAGES_FOLDER + "large_invader_b.png";
@@ -58,17 +62,18 @@ public class ResourcesManager {
     
     public static final String[] INVADER_SPRITES_PATH = {			
 			//INVADER_UFO, INVADER_CHICKEN, INVADER_BEE,INVADER_SCI_FI
-                        INVADER_UFO_GREEN, INVADER_UFO_PINK, INVADER_JELLYMONSTER,INVADER_FLYMONSTER
+                        INVADER_UFO_GREEN, INVADER_UFO_PINK, INVADER_JELLYMONSTER,INVADER_YELLOW_MONSTER, INVADER_GREEN_MONSTER
 	};
 
 //    public static final String ROCKET_SMALL = IMAGES_FOLDER + "rocket.png";
     public static HashMap<Integer, String> getInvaderSprites() {
         HashMap<Integer, String> invaders = new HashMap<Integer, String>();
         
-        for (int i = 1; i <= INVADER_SPRITES_PATH.length; i++){
+      //  List <String> fileNames = new ArrayList<> ();
+        
+        for (int i = 0; i < INVADER_SPRITES_PATH.length; i++){
             invaders.put(i, INVADER_SPRITES_PATH [i]);
         }
-        System.out.println(invaders);
         
        // invaders.put(1, ResourcesManager.NEWINVADERS_IMAGES_FOLDER + "large_invader_b.png");
        // invaders.put(2, ResourcesManager.NEWINVADERS_IMAGES_FOLDER + "small_invader_b.png");
@@ -94,17 +99,18 @@ public class ResourcesManager {
                 }
             };
             
-        /*File() files = invadersFolder.listFiles(filter); 
-        
-        for (File file : files){
-            fileNames.add(file.getName()); 
-        }
-        */
+            File[] files = invadersFolder.listFiles(filter); 
+            
+            for (File file : files){
+                fileNames.add(file.getName()); 
+            }
         
         }catch (Exception e){
             System.err.println(e.getMessage());
         }
     
+        System.out.println(fileNames);
+        
         return fileNames; 
     }
 
