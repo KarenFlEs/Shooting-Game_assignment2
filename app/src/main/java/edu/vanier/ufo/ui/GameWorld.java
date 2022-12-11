@@ -42,11 +42,16 @@ public class GameWorld extends GameEngine {
     ImageView lifeView03 =  new ImageView(new Image("/images/ship_life.gif"));
     ImageView gameOver =  new ImageView(new Image("/images/game_over.gif"));
     ImageView gameWin =  new ImageView(new Image("/images/win_display.png"));
+    
+    ImageView levelUp =  new ImageView(new Image("/images/levelUp.gif"));
     Label lifeLabel = new Label();
     Label levelLabel = new Label();
     Label scoreLabel = new Label ();
     HBox row4 = new HBox();
     VBox stats = new VBox();
+    
+    String explosionAudio = ""; 
+    String laserAudio = ""; 
     
     int numLevel = 1;
     int score = 0;
@@ -105,8 +110,6 @@ public class GameWorld extends GameEngine {
         lifeView03.setFitWidth(50);
 
         HBox row1 = new HBox();
-       // HBox row4 = new HBox();
-        //row4.getChildren().add(gameOver);
        
         HBox row2 = new HBox();
         scoreLabel.setText("Score: " + score);
@@ -126,7 +129,11 @@ public class GameWorld extends GameEngine {
 
         // load sound files
         getSoundManager().loadSoundEffects("laser", getClass().getClassLoader().getResource(ResourcesManager.SOUND_LASER));
+        getSoundManager().loadSoundEffects("laser2", getClass().getClassLoader().getResource(ResourcesManager.SOUND_LASER2));
+        getSoundManager().loadSoundEffects("laser3", getClass().getClassLoader().getResource(ResourcesManager.SOUND_LASER3));
         getSoundManager().loadSoundEffects("explosion", getClass().getClassLoader().getResource(ResourcesManager.SOUND_EXPLOSION));
+        getSoundManager().loadSoundEffects("explosion2", getClass().getClassLoader().getResource(ResourcesManager.SOUND_EXPLOSION2));
+        getSoundManager().loadSoundEffects("explosion3", getClass().getClassLoader().getResource(ResourcesManager.SOUND_EXPLOSION3));
         
     }
 
@@ -149,7 +156,7 @@ public class GameWorld extends GameEngine {
                 getSpriteManager().addSprites(missile);
 
                 // play sound
-                getSoundManager().playSound("laser");
+                getSoundManager().playSound(laserAudio);
                 
                 getSceneNodes().getChildren().add(0, missile.getNode());
 
@@ -395,20 +402,17 @@ public class GameWorld extends GameEngine {
                 else if (spriteB != spaceShip && (spriteA instanceof Atom ) ) {
                     if((spaceShip.lifeNumber != 0) ){
                         if (spriteB instanceof Missile ) {
-                            getSoundManager().playSound("explosion");
+                            getSoundManager().playSound(explosionAudio);
                             spriteA.handleDeath(this);
                              updateScore(score++);
                              deadInvader++;
                         }
-                       
                         
                         if (deadInvader == 10){
-                
                             numLevel=2; 
                             newLevel(2); 
                         }
-                         if (deadInvader == 30){
-                     
+                        if (deadInvader == 20){
                             numLevel=3; 
                             newLevel(3); 
                         }
@@ -435,26 +439,26 @@ public class GameWorld extends GameEngine {
     public void newLevel(int numlevel){
         if (numLevel == 1){
             updateLvlHud(1);
+            explosionAudio = "explosion"; 
+            laserAudio = "laser";
             generateManySpheres(10,1.5);
         }
         
         if (numLevel == 2){
             updateLvlHud(2);
+            explosionAudio = "explosion2"; 
+            laserAudio = "laser2"; 
             generateManySpheres(20,3.0);
-            spaceShip.changeShip("/images/spaceShips_007.png");
+            spaceShip.changeShip("/images/newSpaceShips/spaceShip2.png");
         }
         
         if (numLevel == 3){
-              updateLvlHud(2);
-            generateManySpheres(30,3.0);
-            spaceShip.changeShip("/images/newSpaceShips/spaceShips_004.png");
             updateLvlHud(3);
-            
-            
-        
+            explosionAudio = "explosion3"; 
+            laserAudio = "laser3"; 
+            generateManySpheres(30,3.0);
+            spaceShip.changeShip("/images/newSpaceShips/spaceShip3.png");
         }
-    
-    
     }
 }
         
