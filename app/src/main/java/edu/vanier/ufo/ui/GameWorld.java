@@ -50,6 +50,7 @@ public class GameWorld extends GameEngine {
     
     int numLevel = 1;
     int score = 0;
+    int deadInvader =0;
 
     public GameWorld(int fps, String title) {
         super(fps, title);
@@ -85,7 +86,7 @@ public class GameWorld extends GameEngine {
         // Create many spheres
         // TODO: change this. It must be implemented as a new game level.
         //generateManySpheres(10,0);
-        newLevel(); 
+        newLevel(1); 
             
         // Display the number of spheres visible.
         // Create a button to add more spheres.
@@ -368,12 +369,15 @@ public class GameWorld extends GameEngine {
                 if (spriteA != spaceShip && !(spriteB instanceof Atom )) {
                     spriteA.handleDeath(this);
                     spaceShip.lifeNumber--;
+                     //deadInvader++;
 
                     if (spaceShip.lifeNumber == 2) {
                     lifeView03.imageProperty().set(null);
+                     deadInvader++;
                     }
                     if (spaceShip.lifeNumber == 1) {
                     lifeView02.imageProperty().set(null);
+                    deadInvader++;
                     }
                     if (spaceShip.lifeNumber == 0) {
                     spriteB.handleDeath(this);
@@ -383,7 +387,9 @@ public class GameWorld extends GameEngine {
                     //stats.getChildren().clear();
                     getSceneNodes().getChildren().clear();
                     getSceneNodes().getChildren().add(gameOver);
+                    //deadInvader--;
                     }
+                  
                 } 
                 
                 else if (spriteB != spaceShip && (spriteA instanceof Atom ) ) {
@@ -391,29 +397,33 @@ public class GameWorld extends GameEngine {
                         if (spriteB instanceof Missile ) {
                             getSoundManager().playSound("explosion");
                             spriteA.handleDeath(this);
+                             updateScore(score++);
+                             deadInvader++;
                         }
-                        updateScore(score++); 
+                       
                         
-                        if (score == 10){
-                            //System.out.println(getSceneNodes().getChildren().contains("Atom"));
-                            numLevel++; 
-                            newLevel(); 
+                        if (deadInvader == 10){
+                
+                            numLevel=2; 
+                            newLevel(2); 
                         }
-                         if (score == 30){
-                            //System.out.println(getSceneNodes().getChildren().contains("Atom"));
-                            numLevel++; 
-                            newLevel(); 
+                         if (deadInvader == 30){
+                     
+                            numLevel=3; 
+                            newLevel(3); 
                         }
-                        if (score == 60){
-                            //System.out.println(getSceneNodes().getChildren().contains("Atom"));
-                            numLevel++; 
-                            newLevel(); 
+                        if (deadInvader == 60){
+                        gameWin.setFitWidth(700);
+                        gameWin.setTranslateX(400);
+                        gameWin.setTranslateY(200);
+                        getSceneNodes().getChildren().add(gameWin);
                         }
                         
                         
                     }
                     //int counter =1;
                 }
+               System.out.println(deadInvader);
             return true; 
             }
              
@@ -422,8 +432,9 @@ public class GameWorld extends GameEngine {
     return false; 
 }
          
-    public void newLevel(){
+    public void newLevel(int numlevel){
         if (numLevel == 1){
+            updateLvlHud(1);
             generateManySpheres(10,1.5);
         }
         
@@ -434,59 +445,16 @@ public class GameWorld extends GameEngine {
         }
         
         if (numLevel == 3){
+              updateLvlHud(2);
             generateManySpheres(30,3.0);
             spaceShip.changeShip("/images/newSpaceShips/spaceShips_004.png");
             updateLvlHud(3);
-                gameWin.setFitWidth(700);
-                gameWin.setTranslateX(400);
-                gameWin.setTranslateY(200);
-                getSceneNodes().getChildren().add(gameWin);
             
+            
+        
         }
     
-    /*
-        if((spaceShip.lifeNumber != 0)){
-           // Random rnd = new Random();
-
-            if(this.getSpriteManager().getAllSprites().size()==2){
-            if (counter==1) {
-                updateLvlHud(2);
-                generateManySpheres(15,1.5);
-            spaceShip.changeShip("/images/spaceShips_004.png");
-            counter++;
-
-            }   
-
-                  if (counter==2) {
-                 updateLvlHud(3);
-                  generateManySpheres(20,3.0);
-                  spaceShip.changeShip("/images/spaceShips_007.png");
-               counter++;
-            }     
-
-            if (counter==3) {
-
-                gameWin.setFitWidth(700);
-                gameWin.setTranslateX(400);
-                gameWin.setTranslateY(200);
-
-                 stats.getChildren().add(gameWin);
-                } 
-
-
-
-           }
-    }
-            }
-            
-            
-       }  
-     
-        return false;
-            }
-
-        
-*/
+    
     }
 }
         
