@@ -19,6 +19,19 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.util.Random;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import javafx.scene.image.Image;
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import java.util.Random;
+import javafx.scene.image.ImageView;
 
 /**
  * This is a simple game world simulating a bunch of spheres looking like atomic
@@ -358,7 +371,6 @@ public class GameWorld extends GameEngine {
     }
     
     public void newLevel(int level){
-        
         if((spaceShip.lifeNumber != 0) ){
             if (level == 1){
                 updateLvlHud(1);
@@ -387,11 +399,11 @@ public class GameWorld extends GameEngine {
     
     public void victory(){
            //getSceneNodes().getChildren().clear();
-                        gameWin.setFitWidth(700);
-                        gameWin.setTranslateX(400);
-                        gameWin.setTranslateY(200);
-                        getSceneNodes().getChildren().add(gameWin);  
-        }
+            gameWin.setFitWidth(700);
+            gameWin.setTranslateX(400);
+            gameWin.setTranslateY(200);
+            getSceneNodes().getChildren().add(gameWin);  
+    }
     
     
     
@@ -413,8 +425,7 @@ public class GameWorld extends GameEngine {
                 if (spriteA != spaceShip && !(spriteB instanceof Atom )) {
                     spriteA.handleDeath(this);
                     spaceShip.lifeNumber--;
-                     
-                    
+                    deadInvader++;
 
                     if (spaceShip.lifeNumber == 2) {
                     lifeView03.imageProperty().set(null);
@@ -434,14 +445,15 @@ public class GameWorld extends GameEngine {
                     getSceneNodes().getChildren().add(gameOver);
                    // deadInvader++;
                     }
-                  
-                    deadInvader++;
                     
                 } 
                 
                 else if (spriteB != spaceShip && (spriteA instanceof Atom ) ) {
                     if((spaceShip.lifeNumber != 0) ){
                         if (spriteB instanceof Missile ) {
+                            deadInvader++;
+                            score++;
+                            updateScore(score);
                             getSoundManager().playSound(explosionAudio);
                             spriteA.handleDeath(this);
                         }
@@ -450,14 +462,12 @@ public class GameWorld extends GameEngine {
                             numLevel=2; 
                             newLevel(2); 
                         }
-                        if (deadInvader == 20){
+                        if (deadInvader == 30){
                             numLevel=3; 
                             newLevel(3); 
                         }
                         if (deadInvader == 60){
-                             //numLevel=3; 
-                       victory();
-
+                            victory();
                         }
                     }
                
@@ -471,6 +481,11 @@ public class GameWorld extends GameEngine {
     return false; 
 }
          
+    public void deadInvader(){
+
+
+    }
+    
     
     
 }
