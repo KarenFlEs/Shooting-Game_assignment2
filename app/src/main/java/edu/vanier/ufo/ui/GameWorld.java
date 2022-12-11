@@ -19,19 +19,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.util.Random;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
-import javafx.scene.image.Image;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.scene.image.ImageView;
 
 /**
  * This is a simple game world simulating a bunch of spheres looking like atomic
@@ -100,7 +87,7 @@ public class GameWorld extends GameEngine {
 
         // Setup Game input
         setupInput(primaryStage);
-
+        
         // Create many spheres
         // TODO: change this. It must be implemented as a new game level.
         //generateManySpheres(10,0);
@@ -156,6 +143,7 @@ public class GameWorld extends GameEngine {
      * @param primaryStage The primary stage (app window).
      */
     private void setupInput(Stage primaryStage) {
+        
         System.out.println("Ship's center is (" + spaceShip.getCenterX() + ", " + spaceShip.getCenterY() + ")");
 
         EventHandler fireOrMove = (EventHandler<MouseEvent>) (MouseEvent event) -> {
@@ -370,7 +358,11 @@ public class GameWorld extends GameEngine {
          scoreLabel.setText("Score: " + score);
     }
     
+    
+    
     public void newLevel(int level){
+        long lnum = 1000; 
+        
         if((spaceShip.lifeNumber != 0) ){
             if (level == 1){
                 updateLvlHud(1);
@@ -380,6 +372,8 @@ public class GameWorld extends GameEngine {
             }
 
             if (level == 2){
+                spaceShip.getNode().setTranslateX(700);
+                spaceShip.getNode().setTranslateY(700);
                 updateLvlHud(2);
                 explosionAudio = "explosion2"; 
                 laserAudio = "laser2"; 
@@ -388,6 +382,8 @@ public class GameWorld extends GameEngine {
             }
 
             if (level == 3){
+                spaceShip.getNode().setTranslateX(700);
+                spaceShip.getNode().setTranslateY(700);
                 updateLvlHud(3);
                 explosionAudio = "explosion3"; 
                 laserAudio = "laser3"; 
@@ -404,7 +400,6 @@ public class GameWorld extends GameEngine {
             gameWin.setTranslateY(200);
             getSceneNodes().getChildren().add(gameWin);  
     }
-    
     
     
      /**
@@ -472,19 +467,12 @@ public class GameWorld extends GameEngine {
                     }
                
                 }
-               System.out.println(deadInvader);
-            return true; 
+                System.out.println(deadInvader);
+                return true; 
             }
-             
-    
        }
-    return false; 
+        return false; 
 }
-         
-    public void deadInvader(){
-
-
-    }
     
     
     

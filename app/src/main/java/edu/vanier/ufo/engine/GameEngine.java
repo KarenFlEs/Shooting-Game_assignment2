@@ -1,6 +1,8 @@
 package edu.vanier.ufo.engine;
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -108,7 +110,8 @@ public abstract class GameEngine {
     public void beginGameLoop() {
         getGameLoop().play();
     }
-
+   
+    
     /**
      * Updates each game sprite in the game world. This method will loop through
      * each sprite and passing it to the handleUpdate() method. The derived

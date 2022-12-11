@@ -501,7 +501,7 @@ public class Ship extends Sprite {
             shield = new Circle();
             shield.setRadius(65);
             shield.setStrokeWidth(10);
-            shield.setStroke(Color.LIGHTGREEN);
+            shield.setStroke(Color.WHITESMOKE);
             shield.setCenterX(x);
             shield.setCenterY(y);
             shield.setOpacity(.70);
