@@ -189,7 +189,7 @@ public class GameWorld extends GameEngine {
                     }
                 case S -> {
                     double positionX = spaceShip.getCenterX();
-                    double positionY = (spaceShip.getCenterY()+800);
+                    double positionY = (spaceShip.getCenterY()+ 800);
                     spaceShip.plotCourse(positionX, positionY, true);
                     }
                 case A -> {
@@ -367,10 +367,11 @@ public class GameWorld extends GameEngine {
     @Override
     protected boolean handleCollision(Sprite spriteA, Sprite spriteB) {
         //Scene gameSurface = getGameSurface();
+        
        if (spriteA != spriteB) {
             if (spriteA.collide(spriteB)) {
 
-                if (spriteA != spaceShip && !(spriteB.toString().contains("Missile") )) {
+                if (spriteA != spaceShip && !(spriteB instanceof Atom )) {
                     spriteA.handleDeath(this);
                     
                     spaceShip.lifeNumber--;
@@ -394,37 +395,41 @@ public class GameWorld extends GameEngine {
                     }
 
                 } 
-                else if (spriteB != spaceShip && (spriteA.toString().contains("Atom")) && !(spaceShip.lifeNumber == 0) ) {
-              
-                    if ((spriteB.toString().contains("Missile"))) {
+                else if (spriteB != spaceShip && (spriteA instanceof Atom ) ) {
+              if((spaceShip.lifeNumber != 0) ){
+                    if (spriteB instanceof Missile ) {
                         getSoundManager().playSound("explosion");
                         spriteA.handleDeath(this);
                    
                     }
                    updateScore(score++); 
+              }
                     
                 }
                 
-               //int counter =1;
-    if(!(spaceShip.lifeNumber == 0)){
+               int counter =1;
+               
+    if((spaceShip.lifeNumber != 0)){
        // Random rnd = new Random();
        
-        
-        if (score == 10-(3-spaceShip.lifeNumber)) {
+       
+        if(this.getSpriteManager().getAllSprites().size()==2){
+        if (counter==1) {
             updateLvlHud(2);
             generateManySpheres(15,1.5);
         spaceShip.changeShip("/images/spaceShips_004.png");
+        counter++;
         
         }   
         
-              if (score == 25) {
+              if (counter==2) {
              updateLvlHud(3);
               generateManySpheres(20,3.0);
               spaceShip.changeShip("/images/spaceShips_007.png");
-           
+           counter++;
         }     
               
-        /*if (score == 45) {
+        if (counter==3) {
             
             gameWin.setFitWidth(700);
             gameWin.setTranslateX(400);
@@ -434,10 +439,11 @@ public class GameWorld extends GameEngine {
              
              
             } 
-*/
+
                 
         
        }
+    }
             }
             
             
