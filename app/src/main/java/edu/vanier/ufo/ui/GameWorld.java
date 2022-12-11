@@ -181,21 +181,21 @@ public class GameWorld extends GameEngine {
                 switch (event.getCode()) {
                 case W -> {
                     double positionX = spaceShip.getCenterX();
-                    double positionY = (spaceShip.getCenterY()-800);
+                    double positionY = (spaceShip.getCenterY()-50);
                     spaceShip.plotCourse(positionX, positionY, true);
                     }
                 case S -> {
                     double positionX = spaceShip.getCenterX();
-                    double positionY = (spaceShip.getCenterY()+ 800);
+                    double positionY = (spaceShip.getCenterY()+ 50);
                     spaceShip.plotCourse(positionX, positionY, true);
                     }
                 case A -> {
-                    double positionX = (spaceShip.getCenterX()-800);
+                    double positionX = (spaceShip.getCenterX()-50);
                     double positionY = (spaceShip.getCenterY());
                     spaceShip.plotCourse(positionX, positionY, true);
                     }
                 case D -> {
-                    double positionX = (spaceShip.getCenterX()+800);
+                    double positionX = (spaceShip.getCenterX()+50);
                     double positionY = (spaceShip.getCenterY());
                     spaceShip.plotCourse(positionX, positionY, true);
                     }
@@ -350,6 +350,42 @@ public class GameWorld extends GameEngine {
          scoreLabel.setText("Score: " + score);
     }
     
+    public void newLevel(int level){
+        
+        if((spaceShip.lifeNumber != 0) ){
+        if (level == 1){
+            updateLvlHud(1);
+            generateManySpheres(10,1.5);
+        }
+        
+        if (level == 2){
+            updateLvlHud(2);
+            generateManySpheres(20,3.0);
+            spaceShip.changeShip("/images/spaceShips_007.png");
+        }
+        
+        if (level == 3){
+              updateLvlHud(3);
+            generateManySpheres(30,3.0);
+            spaceShip.changeShip("/images/newSpaceShips/spaceShips_004.png");
+            updateLvlHud(3);
+         
+        }
+       
+        }
+        
+        
+    }
+    
+    public void victory(){
+           //getSceneNodes().getChildren().clear();
+                        gameWin.setFitWidth(700);
+                        gameWin.setTranslateX(400);
+                        gameWin.setTranslateY(200);
+                        getSceneNodes().getChildren().add(gameWin);  
+        }
+    
+    
     
      /**
      * How to handle the collision of two sprite objects. Stops the particle by
@@ -369,27 +405,30 @@ public class GameWorld extends GameEngine {
                 if (spriteA != spaceShip && !(spriteB instanceof Atom )) {
                     spriteA.handleDeath(this);
                     spaceShip.lifeNumber--;
-                     //deadInvader++;
+                     
+                    
 
                     if (spaceShip.lifeNumber == 2) {
                     lifeView03.imageProperty().set(null);
-                     deadInvader++;
+                   // deadInvader++;
                     }
                     if (spaceShip.lifeNumber == 1) {
                     lifeView02.imageProperty().set(null);
-                    deadInvader++;
+               // deadInvader++;
                     }
                     if (spaceShip.lifeNumber == 0) {
                     spriteB.handleDeath(this);
                     lifeView01.imageProperty().set(null);
-                    gameOver.setTranslateX(700);
-                    gameOver.setTranslateY(100);
+                    gameOver.setTranslateX(500);
+                    gameOver.setTranslateY(200);
                     //stats.getChildren().clear();
                     getSceneNodes().getChildren().clear();
                     getSceneNodes().getChildren().add(gameOver);
-                    //deadInvader--;
+                   // deadInvader++;
                     }
                   
+                    deadInvader++;
+                    
                 } 
                 
                 else if (spriteB != spaceShip && (spriteA instanceof Atom ) ) {
@@ -397,13 +436,12 @@ public class GameWorld extends GameEngine {
                         if (spriteB instanceof Missile ) {
                             getSoundManager().playSound("explosion");
                             spriteA.handleDeath(this);
-                             updateScore(score++);
-                             deadInvader++;
+                             
                         }
-                       
+                       updateScore(score++);
+                       deadInvader++;
                         
-                        if (deadInvader == 10){
-                
+                        if (deadInvader== 10){
                             numLevel=2; 
                             newLevel(2); 
                         }
@@ -413,15 +451,14 @@ public class GameWorld extends GameEngine {
                             newLevel(3); 
                         }
                         if (deadInvader == 60){
-                        gameWin.setFitWidth(700);
-                        gameWin.setTranslateX(400);
-                        gameWin.setTranslateY(200);
-                        getSceneNodes().getChildren().add(gameWin);
+                             //numLevel=3; 
+                       victory();
+
                         }
                         
                         
                     }
-                    //int counter =1;
+               
                 }
                System.out.println(deadInvader);
             return true; 
@@ -431,30 +468,10 @@ public class GameWorld extends GameEngine {
        }
     return false; 
 }
-         
-    public void newLevel(int numlevel){
-        if (numLevel == 1){
-            updateLvlHud(1);
-            generateManySpheres(10,1.5);
-        }
-        
-        if (numLevel == 2){
-            updateLvlHud(2);
-            generateManySpheres(20,3.0);
-            spaceShip.changeShip("/images/spaceShips_007.png");
-        }
-        
-        if (numLevel == 3){
-              updateLvlHud(2);
-            generateManySpheres(30,3.0);
-            spaceShip.changeShip("/images/newSpaceShips/spaceShips_004.png");
-            updateLvlHud(3);
-            
-            
-        
-        }
+
     
     
-    }
+    
+
 }
         
