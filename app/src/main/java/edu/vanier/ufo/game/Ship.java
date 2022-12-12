@@ -153,6 +153,9 @@ public class Ship extends Sprite {
      */
     private Circle hitBounds;
     
+    /**
+     *The type of rocket being fired by the ship
+     */
     protected static String rocketType; 
 
     public String getRocketType() {

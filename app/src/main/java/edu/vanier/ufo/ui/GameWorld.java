@@ -77,7 +77,7 @@ public class GameWorld extends GameEngine {
         primaryStage.setTitle(getWindowTitle());
         //TODO: try the following window size options:
         //primaryStage.setFullScreen(true);
-        //primaryStage.setMaximized(true);   
+       // primaryStage.setMaximized(true);   
        //timeline = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(levelUp)));
         // Create the scene
        
@@ -160,12 +160,15 @@ public class GameWorld extends GameEngine {
 
                 // fire
                 Missile missile = spaceShip.fire();
+               
+                
                 getSpriteManager().addSprites(missile);
 
                 // play sound
                 getSoundManager().playSound(laserAudio);
                 
                 getSceneNodes().getChildren().add(0, missile.getNode());
+          
 
             } else if (event.getButton() == MouseButton.SECONDARY) {
                 // determine when all atoms are not on the game surface. Ship should be one sprite left.
@@ -253,7 +256,7 @@ public class GameWorld extends GameEngine {
             
             atom.setVelocityX((((rnd.nextInt(2) + rnd.nextDouble()) * (rnd.nextBoolean() ? 1 : -1)))+x);
             atom.setVelocityY((((rnd.nextInt(2) + rnd.nextDouble()) * (rnd.nextBoolean() ? 1 : -1)))+x);
-            //atom.setVelocityY((rnd.nextInt(2) + rnd.nextDouble()) * (rnd.nextBoolean() ? 1 : -1));
+           
 
             // random x between 0 to width of scene
             double newX = rnd.nextInt((int) gameSurface.getWidth() - 100);
@@ -367,13 +370,13 @@ public class GameWorld extends GameEngine {
     public void levelUp(){
      Image levelUp = new Image("/images/levelUp.gif") ;
      ImageView imageView = new ImageView();
-      imageView.setTranslateY(100);
-      imageView.setTranslateX(250);
-      imageView.setFitHeight(600);
-      imageView.setFitWidth(1000);
+     imageView.setTranslateY(100);
+    
+      imageView.setFitHeight(100);
+      imageView.setFitWidth(100);
        timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(imageView.imageProperty(), levelUp)),
-                new KeyFrame(Duration.seconds(3), new KeyValue(imageView.imageProperty(), null))
+                new KeyFrame(Duration.seconds(2), new KeyValue(imageView.imageProperty(), null))
                 );
         timeline.play();
         getSceneNodes().getChildren().add(imageView);
@@ -389,7 +392,7 @@ public class GameWorld extends GameEngine {
                
                 explosionAudio = "explosion"; 
                 laserAudio = "laser";
-                generateManySpheres(10,0);
+                generateManySpheres(10,0.0);
             }
 
             if (level == 2){
@@ -398,7 +401,7 @@ public class GameWorld extends GameEngine {
                 spaceShip.setRocketType(ResourcesManager.ROCKET_CROSS);
                 explosionAudio = "explosion2"; 
                 laserAudio = "laser2"; 
-                generateManySpheres(20,0.75);
+                generateManySpheres(20,1.0);
                 spaceShip.changeShip("/images/newSpaceShips/spaceShip2.png");
             }
 
@@ -409,7 +412,7 @@ public class GameWorld extends GameEngine {
                
                 explosionAudio = "explosion3"; 
                 laserAudio = "laser3"; 
-                generateManySpheres(30,1.5);
+                generateManySpheres(30,2.0);
                 spaceShip.changeShip("/images/newSpaceShips/spaceShip3.png");
             }
         }
