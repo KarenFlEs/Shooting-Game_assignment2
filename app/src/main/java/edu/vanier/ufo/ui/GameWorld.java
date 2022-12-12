@@ -6,22 +6,8 @@ import javafx.event.EventHandler;
 import javafx.scene.CacheHint;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;;
-import javafx.animation.KeyFrame;
-import javafx.util.Duration;
-import javafx.scene.image.Image;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
+import javafx.scene.Scene;
 import javafx.animation.Timeline;
-import javafx.scene.image.ImageView;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 import javafx.scene.image.Image;
@@ -36,35 +22,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.util.Random;
 import javafx.animation.KeyValue;
-import javafx.scene.image.ImageView;
-import javafx.animation.KeyFrame;
-import javafx.util.Duration;
-import javafx.scene.image.Image;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
-import javafx.animation.Timeline;
-import javafx.scene.image.ImageView;
-import javafx.animation.KeyFrame;
-import javafx.util.Duration;
-import javafx.scene.image.Image;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import java.util.Random;
 import javafx.scene.image.ImageView;
 
 /**
@@ -89,17 +46,12 @@ public class GameWorld extends GameEngine {
     ImageView lifeView03 =  new ImageView(new Image("/images/ship_life.gif"));
     ImageView gameOver =  new ImageView(new Image("/images/game_over.gif"));
     ImageView gameWin =  new ImageView(new Image("/images/win_display.png"));
-   // PauseTransition hitAnimation = new PauseTransition(Duration.seconds(1));
-      
-        
-
-    ImageView levelUp =  new ImageView(new Image("/images/levelUp.gif"));
-    
     Label lifeLabel = new Label();
     Label levelLabel = new Label();
     Label scoreLabel = new Label ();
     HBox row4 = new HBox();
     VBox stats = new VBox();
+    Timeline timeline;
     
     String explosionAudio = ""; 
     String laserAudio = ""; 
@@ -299,8 +251,8 @@ public class GameWorld extends GameEngine {
             // random 0 to 2 + (.0 to 1) * random (1 or -1)
             // Randomize the location of each newly generated atom
             
-            atom.setVelocityX((((rnd.nextInt(2) + rnd.nextDouble()) * (rnd.nextBoolean() ? 1 : -1))));
-             atom.setVelocityY((((rnd.nextInt(2) + rnd.nextDouble()) * (rnd.nextBoolean() ? 1 : -1))));
+            atom.setVelocityX((((rnd.nextInt(2) + rnd.nextDouble()) * (rnd.nextBoolean() ? 1 : -1)))+x);
+            atom.setVelocityY((((rnd.nextInt(2) + rnd.nextDouble()) * (rnd.nextBoolean() ? 1 : -1)))+x);
             //atom.setVelocityY((rnd.nextInt(2) + rnd.nextDouble()) * (rnd.nextBoolean() ? 1 : -1));
 
             // random x between 0 to width of scene
@@ -412,49 +364,59 @@ public class GameWorld extends GameEngine {
          scoreLabel.setText("Score: " + score);
     }
     
-    
+    public void levelUp(){
+     Image levelUp = new Image("/images/levelUp.gif") ;
+     ImageView imageView = new ImageView();
+      imageView.setTranslateY(100);
+      imageView.setTranslateX(250);
+      imageView.setFitHeight(600);
+      imageView.setFitWidth(1000);
+       timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(imageView.imageProperty(), levelUp)),
+                new KeyFrame(Duration.seconds(3), new KeyValue(imageView.imageProperty(), null))
+                );
+        timeline.play();
+        getSceneNodes().getChildren().add(imageView);
+    }
     
     public void newLevel(int level){
         
         if((spaceShip.lifeNumber != 0) ){
             if (level == 1){
-                //levelUp();
+            
                 updateLvlHud(1);
                 spaceShip.setRocketType(ResourcesManager.ROCKET_SMALL);
-               // rocketType = ResourcesManager.ROCKET_SMALL; 
+               
                 explosionAudio = "explosion"; 
                 laserAudio = "laser";
-                generateManySpheres(10,1.5);
+                generateManySpheres(10,0);
             }
 
             if (level == 2){
-           
-               // spaceShip.getNode().setTranslateX(700);
-             //   spaceShip.getNode().setTranslateY(700);
+                levelUp();
                 updateLvlHud(2);
                 spaceShip.setRocketType(ResourcesManager.ROCKET_CROSS);
-                //rocketType = ResourcesManager.ROCKET_CROSS; 
                 explosionAudio = "explosion2"; 
                 laserAudio = "laser2"; 
-                generateManySpheres(20,3.0);
+                generateManySpheres(20,0.75);
                 spaceShip.changeShip("/images/newSpaceShips/spaceShip2.png");
             }
 
             if (level == 3){
-              
+                 levelUp();
                 updateLvlHud(3);
                 spaceShip.setRocketType(ResourcesManager.ROCKET_RED);
-                //rocketType = ResourcesManager.ROCKET_RED; 
+               
                 explosionAudio = "explosion3"; 
                 laserAudio = "laser3"; 
-                generateManySpheres(30,3.0);
+                generateManySpheres(30,1.5);
                 spaceShip.changeShip("/images/newSpaceShips/spaceShip3.png");
             }
         }
     }
     
     public void victory(){
-           //getSceneNodes().getChildren().clear();
+         
             gameWin.setFitWidth(700);
             gameWin.setTranslateX(400);
             gameWin.setTranslateY(200);
@@ -477,21 +439,8 @@ public class GameWorld extends GameEngine {
         }
     }
    
-    Timeline timeline;
-    public void levelUp(){
-     Image image1 = new Image("/images/levelUp.gif") ;
-      //  Image image2 = new Image("...")  ;
-      
-        ImageView imageView = new ImageView();
-      imageView.setTranslateX(400);
-      imageView.setTranslateX(200);
-       timeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(imageView.imageProperty(), image1)),
-                new KeyFrame(Duration.seconds(3), new KeyValue(imageView.imageProperty(), null))
-                );
-        timeline.play();
-        getSceneNodes().getChildren().add(imageView);
-    }
+    
+    
      /**
      * How to handle the collision of two sprite objects. Stops the particle by
      * zeroing out the velocity if a collision occurred.
@@ -507,7 +456,7 @@ public class GameWorld extends GameEngine {
        if (spriteA != spriteB) {
             if (spriteA.collide(spriteB)) {
 
-                if ((spriteA != spaceShip) && !(spriteB instanceof Atom ) && (spaceShip.shieldOn==false) ) {
+                if ((spriteA != spaceShip) && !(spriteB instanceof Atom ) && (spaceShip.isShieldOn()==false) ) {
                     spriteA.handleDeath(this);
                     spaceShip.lifeNumber--;
                    
