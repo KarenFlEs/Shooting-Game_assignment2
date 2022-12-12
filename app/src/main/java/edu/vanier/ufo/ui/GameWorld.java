@@ -7,6 +7,8 @@ import javafx.scene.CacheHint;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;;
+import javafx.animation.KeyFrame;
+import javafx.util.Duration;
 import javafx.scene.image.Image;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
@@ -42,8 +44,12 @@ public class GameWorld extends GameEngine {
     ImageView lifeView03 =  new ImageView(new Image("/images/ship_life.gif"));
     ImageView gameOver =  new ImageView(new Image("/images/game_over.gif"));
     ImageView gameWin =  new ImageView(new Image("/images/win_display.png"));
-    
+   // PauseTransition hitAnimation = new PauseTransition(Duration.seconds(1));
+      
+        
+
     ImageView levelUp =  new ImageView(new Image("/images/levelUp.gif"));
+    
     Label lifeLabel = new Label();
     Label levelLabel = new Label();
     Label scoreLabel = new Label ();
@@ -75,8 +81,9 @@ public class GameWorld extends GameEngine {
         //TODO: try the following window size options:
         //primaryStage.setFullScreen(true);
         //primaryStage.setMaximized(true);   
-       
+       //timeline = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(levelUp)));
         // Create the scene
+       
         setSceneNodes(new Group());
         setGameSurface(new Scene(getSceneNodes(), 1000, 600) );
 
@@ -375,6 +382,7 @@ public class GameWorld extends GameEngine {
             }
 
             if (level == 2){
+           
                // spaceShip.getNode().setTranslateX(700);
              //   spaceShip.getNode().setTranslateY(700);
                 updateLvlHud(2);
@@ -387,6 +395,7 @@ public class GameWorld extends GameEngine {
             }
 
             if (level == 3){
+              
                 updateLvlHud(3);
                 spaceShip.setRocketType(ResourcesManager.ROCKET_RED);
                 //rocketType = ResourcesManager.ROCKET_RED; 
@@ -408,10 +417,12 @@ public class GameWorld extends GameEngine {
     
     public void deathInvadersDetector() {
         if (deadInvader == 10) {
+            
             numLevel = 2;
             newLevel(2);
         }
         if (deadInvader == 30) {
+           
             numLevel = 3;
             newLevel(3);
         }
@@ -435,11 +446,10 @@ public class GameWorld extends GameEngine {
        if (spriteA != spriteB) {
             if (spriteA.collide(spriteB)) {
 
-                if (spriteA != spaceShip && !(spriteB instanceof Atom )) {
+                if ((spriteA != spaceShip) && !(spriteB instanceof Atom ) && (spaceShip.shieldOn==false) ) {
                     spriteA.handleDeath(this);
                     spaceShip.lifeNumber--;
-                    //deadInvader++;
-
+                   
                     if (spaceShip.lifeNumber == 2) {
                     lifeView03.imageProperty().set(null);
                     deadInvader++;
@@ -455,10 +465,10 @@ public class GameWorld extends GameEngine {
                     lifeView01.imageProperty().set(null);
                     gameOver.setTranslateX(500);
                     gameOver.setTranslateY(200);
-                    //stats.getChildren().clear();
+                  
                     getSceneNodes().getChildren().clear();
                     getSceneNodes().getChildren().add(gameOver);
-                   // deadInvader++;
+                   
                     }
                     
                 } 

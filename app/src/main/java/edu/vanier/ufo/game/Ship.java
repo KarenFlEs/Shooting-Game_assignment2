@@ -132,7 +132,7 @@ public class Ship extends Sprite {
     /**
      * Turn shields on
      */
-    private boolean shieldOn;
+    public boolean shieldOn;
 
     /**
      * Green shield to be used as collision bounds.
@@ -511,8 +511,8 @@ public class Ship extends Sprite {
 
             // add shield
             shield = new Circle();
-            shield.setRadius(65);
-            shield.setStrokeWidth(10);
+            shield.setRadius(90);
+            shield.setStrokeWidth(8);
             shield.setStroke(Color.WHITESMOKE);
             shield.setCenterX(x);
             shield.setCenterY(y);
