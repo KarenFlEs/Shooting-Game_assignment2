@@ -160,14 +160,32 @@ public class GameWorld extends GameEngine {
 
                 // fire
                 Missile missile = spaceShip.fire();
-               
-                
                 getSpriteManager().addSprites(missile);
+                getSceneNodes().getChildren().add(0, missile.getNode());
+                
+                if(numLevel == 2){
+                Missile missileB = spaceShip.fire(); 
+                missileB.getNode().setTranslateX(missile.getNode().getTranslateX() + 70.0);
+                getSpriteManager().addSprites(missileB);
+                getSceneNodes().getChildren().add(1, missileB.getNode());
+                }
 
+                if(numLevel == 3){
+                Missile missileB = spaceShip.fire(); 
+                Missile missileC = spaceShip.fire(); 
+                missileB.getNode().setTranslateX(missile.getNode().getTranslateX() + 70.0);
+                missileC.getNode().setTranslateY(missile.getNode().getTranslateY() + 90.0);
+                getSpriteManager().addSprites(missileB);
+                getSpriteManager().addSprites(missileC);
+                getSceneNodes().getChildren().add(1, missileB.getNode());
+                getSceneNodes().getChildren().add(2, missileC.getNode());
+                }
+                
                 // play sound
                 getSoundManager().playSound(laserAudio);
                 
-                getSceneNodes().getChildren().add(0, missile.getNode());
+               // getSceneNodes().getChildren().add(0, missile.getNode());
+               // getSceneNodes().getChildren().add(1, missileB.getNode());
           
 
             } else if (event.getButton() == MouseButton.SECONDARY) {
@@ -386,10 +404,8 @@ public class GameWorld extends GameEngine {
         
         if((spaceShip.lifeNumber != 0) ){
             if (level == 1){
-            
                 updateLvlHud(1);
                 spaceShip.setRocketType(ResourcesManager.ROCKET_SMALL);
-               
                 explosionAudio = "explosion"; 
                 laserAudio = "laser";
                 generateManySpheres(10,0.0);
@@ -397,6 +413,8 @@ public class GameWorld extends GameEngine {
 
             if (level == 2){
                 levelUp();
+                spaceShip.getNode().setTranslateX(700);
+                spaceShip.getNode().setTranslateY(700);
                 updateLvlHud(2);
                 spaceShip.setRocketType(ResourcesManager.ROCKET_CROSS);
                 explosionAudio = "explosion2"; 
@@ -406,10 +424,11 @@ public class GameWorld extends GameEngine {
             }
 
             if (level == 3){
-                 levelUp();
+                levelUp();
+                spaceShip.getNode().setTranslateX(700);
+                spaceShip.getNode().setTranslateY(700);
                 updateLvlHud(3);
                 spaceShip.setRocketType(ResourcesManager.ROCKET_RED);
-               
                 explosionAudio = "explosion3"; 
                 laserAudio = "laser3"; 
                 generateManySpheres(30,2.0);
