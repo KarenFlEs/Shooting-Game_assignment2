@@ -363,7 +363,6 @@ public class GameWorld extends GameEngine {
     
     
     public void newLevel(int level){
-        long lnum = 1000; 
         
         if((spaceShip.lifeNumber != 0) ){
             if (level == 1){
@@ -375,8 +374,8 @@ public class GameWorld extends GameEngine {
             }
 
             if (level == 2){
-                spaceShip.getNode().setTranslateX(700);
-                spaceShip.getNode().setTranslateY(700);
+               // spaceShip.getNode().setTranslateX(700);
+             //   spaceShip.getNode().setTranslateY(700);
                 updateLvlHud(2);
                 rocketType = ResourcesManager.ROCKET_CROSS; 
                 explosionAudio = "explosion2"; 
@@ -386,8 +385,6 @@ public class GameWorld extends GameEngine {
             }
 
             if (level == 3){
-                spaceShip.getNode().setTranslateX(700);
-                spaceShip.getNode().setTranslateY(700);
                 updateLvlHud(3);
                 rocketType = ResourcesManager.ROCKET_RED; 
                 explosionAudio = "explosion3"; 
@@ -406,6 +403,19 @@ public class GameWorld extends GameEngine {
             getSceneNodes().getChildren().add(gameWin);  
     }
     
+    public void deathInvadersDetector() {
+        if (deadInvader == 10) {
+            numLevel = 2;
+            newLevel(2);
+        }
+        if (deadInvader == 30) {
+            numLevel = 3;
+            newLevel(3);
+        }
+        if (deadInvader == 60) {
+            victory();
+        }
+    }
     
      /**
      * How to handle the collision of two sprite objects. Stops the particle by
@@ -425,15 +435,17 @@ public class GameWorld extends GameEngine {
                 if (spriteA != spaceShip && !(spriteB instanceof Atom )) {
                     spriteA.handleDeath(this);
                     spaceShip.lifeNumber--;
-                    deadInvader++;
+                    //deadInvader++;
 
                     if (spaceShip.lifeNumber == 2) {
                     lifeView03.imageProperty().set(null);
-                   // deadInvader++;
+                    deadInvader++;
+                    deathInvadersDetector(); 
                     }
                     if (spaceShip.lifeNumber == 1) {
                     lifeView02.imageProperty().set(null);
-               // deadInvader++;
+                    deadInvader++;
+                    deathInvadersDetector(); 
                     }
                     if (spaceShip.lifeNumber == 0) {
                     spriteB.handleDeath(this);
@@ -457,18 +469,7 @@ public class GameWorld extends GameEngine {
                             getSoundManager().playSound(explosionAudio);
                             spriteA.handleDeath(this);
                         }
-                        
-                        if (deadInvader == 10){
-                            numLevel=2; 
-                            newLevel(2); 
-                        }
-                        if (deadInvader == 30){
-                            numLevel=3; 
-                            newLevel(3); 
-                        }
-                        if (deadInvader == 60){
-                            victory();
-                        }
+                        deathInvadersDetector(); 
                     }
                
                 }
