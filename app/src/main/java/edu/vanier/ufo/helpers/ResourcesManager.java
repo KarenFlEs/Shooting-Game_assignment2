@@ -21,19 +21,29 @@ public class ResourcesManager {
     private static final String RESOURCES_FOLDER = "";
     private static final String IMAGES_FOLDER = RESOURCES_FOLDER + "images/";
     private static final String SOUNDS_FOLDER = RESOURCES_FOLDER + "sounds/";
+    
     // Ship images.
     public static final String SPACE_SHIP = IMAGES_FOLDER + "spiked ship.png";
-    //public static final String SPACE_STAR_SHIP = IMAGES_FOLDER + "starship.png";
-    public static final String SPACE_STAR_SHIP = IMAGES_FOLDER + "newSpaceships/spaceShips_001.png";
     public static final String SPACE_TANK = IMAGES_FOLDER + "tank.png";
+    
+    public static final String SPACE_STAR_SHIP = IMAGES_FOLDER + "newSpaceships/spaceShips_001.png";
    
     // Rocket images
-    public static final String ROCKET_SMALL = IMAGES_FOLDER + "rocket2.png";
-    public static final String ROCKET_FIRE = IMAGES_FOLDER + "light-missile.png";
-    public static final String ROCKET_CROSS = IMAGES_FOLDER + "rocketGreen.png";
-    public static final String ROCKET_RED = IMAGES_FOLDER + "rocketRed.png";
+    private static final String ROCKETS_IMAGES_FOLDER = RESOURCES_FOLDER + "images/newRockets/";
+    
+    public static final String ROCKET_SMALL = ROCKETS_IMAGES_FOLDER + "rocket2.png";
+    public static final String ROCKET_FIRE = ROCKETS_IMAGES_FOLDER + "light-missile.png";
+    public static final String ROCKET_CROSS = ROCKETS_IMAGES_FOLDER + "rocketGreen.png";
+    public static final String ROCKET_RED = ROCKETS_IMAGES_FOLDER + "rocketRed.png";
 
-    public static final String EXPLOSION = IMAGES_FOLDER + "explosion2.gif";
+    //explosion + others
+    private static final String OTHER_IMAGES_FOLDER = RESOURCES_FOLDER + "images/OtherImages/";
+    
+    public static final String EXPLOSION = OTHER_IMAGES_FOLDER + "explosion2.gif";
+    public static final String SHIP_LIFE = OTHER_IMAGES_FOLDER + "ship_life.gif";
+    public static final String LEVEL_UP = OTHER_IMAGES_FOLDER + "levelUp.gif";
+    public static final String GAME_OVER = OTHER_IMAGES_FOLDER + "game_over.gif";
+    public static final String GAME_WIN = OTHER_IMAGES_FOLDER + "win_display.png";
     
     // Invader sprites.
     private static final String NEWINVADERS_IMAGES_FOLDER = RESOURCES_FOLDER + "images/newInvaders/";
@@ -41,19 +51,9 @@ public class ResourcesManager {
     public static final String INVADER_UFO_GREEN = NEWINVADERS_IMAGES_FOLDER + "ufo-green.png"; 
     public static final String INVADER_UFO_PINK = NEWINVADERS_IMAGES_FOLDER + "ufo-pink.png"; 
     public static final String INVADER_JELLYMONSTER = NEWINVADERS_IMAGES_FOLDER + "invader-JellyMonster.png"; 
-   // public static final String INVADER_FLYMONSTER = NEWINVADERS_IMAGES_FOLDER + "invader-flyMonster"; 
     
     public static final String INVADER_YELLOW_MONSTER = NEWINVADERS_IMAGES_FOLDER + "invader-YellowMonster.png";
     public static final String INVADER_GREEN_MONSTER = NEWINVADERS_IMAGES_FOLDER + "invader-GreenMonster.png";
-    
-    /*
-    public static final String INVADER_LARGE_SHIP = IMAGES_FOLDER + "large_invader_b.png";
-    public static final String INVADER_SMALL_SHIP = IMAGES_FOLDER + "small_invader_b.png";
-    public static final String INVADER_UFO = IMAGES_FOLDER + "ufo.png";
-    public static final String INVADER_CHICKEN = IMAGES_FOLDER + "rounded-chicken.png";
-    public static final String INVADER_BEE = IMAGES_FOLDER + "small-bee.png";
-    public static final String INVADER_SCI_FI = IMAGES_FOLDER + "sci-fi.png";
-   */
     
     
     // Sound effect files

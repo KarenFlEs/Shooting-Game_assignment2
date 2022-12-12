@@ -41,22 +41,21 @@ public class GameWorld extends GameEngine {
     Label mousePressPtLabel = new Label();
     
     Ship spaceShip = new Ship();
-    ImageView lifeView01 = new ImageView(new Image("/images/ship_life.gif"));;
-    ImageView lifeView02 = new ImageView(new Image("/images/ship_life.gif"));;
-    ImageView lifeView03 =  new ImageView(new Image("/images/ship_life.gif"));
-    ImageView gameOver =  new ImageView(new Image("/images/game_over.gif"));
-    ImageView gameWin =  new ImageView(new Image("/images/win_display.png"));
+    
+    ImageView lifeView01 = new ImageView(new Image(ResourcesManager.SHIP_LIFE));;
+    ImageView lifeView02 = new ImageView(new Image(ResourcesManager.SHIP_LIFE));;
+    ImageView lifeView03 =  new ImageView(new Image(ResourcesManager.SHIP_LIFE));
+    
+    ImageView gameOver =  new ImageView(new Image(ResourcesManager.GAME_OVER));
+    ImageView gameWin =  new ImageView(new Image(ResourcesManager.GAME_WIN));
     Label lifeLabel = new Label();
     Label levelLabel = new Label();
     Label scoreLabel = new Label ();
-    HBox row4 = new HBox();
     VBox stats = new VBox();
     Timeline timeline;
     
     String explosionAudio = ""; 
     String laserAudio = ""; 
-    
-    //String rocketType = spaceShip.getRocketType(); 
     
     int numLevel = 1;
     int score = 0;
@@ -183,9 +182,6 @@ public class GameWorld extends GameEngine {
                 
                 // play sound
                 getSoundManager().playSound(laserAudio);
-                
-               // getSceneNodes().getChildren().add(0, missile.getNode());
-               // getSceneNodes().getChildren().add(1, missileB.getNode());
           
 
             } else if (event.getButton() == MouseButton.SECONDARY) {
@@ -386,16 +382,16 @@ public class GameWorld extends GameEngine {
     }
     
     public void levelUp(){
-     Image levelUp = new Image("/images/levelUp.gif") ;
-     ImageView imageView = new ImageView();
-     imageView.setTranslateY(100);
-    
-      imageView.setFitHeight(100);
-      imageView.setFitWidth(100);
-       timeline = new Timeline(
+        Image levelUp = new Image(ResourcesManager.LEVEL_UP);
+        ImageView imageView = new ImageView();
+        imageView.setTranslateY(100);
+        imageView.setFitHeight(100);
+        imageView.setFitWidth(100);
+        
+        timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(imageView.imageProperty(), levelUp)),
-                new KeyFrame(Duration.seconds(2), new KeyValue(imageView.imageProperty(), null))
-                );
+                new KeyFrame(Duration.seconds(3), new KeyValue(imageView.imageProperty(), null))
+        );
         timeline.play();
         getSceneNodes().getChildren().add(imageView);
     }
@@ -438,7 +434,6 @@ public class GameWorld extends GameEngine {
     }
     
     public void victory(){
-         
             gameWin.setFitWidth(700);
             gameWin.setTranslateX(400);
             gameWin.setTranslateY(200);
@@ -447,12 +442,10 @@ public class GameWorld extends GameEngine {
     
     public void deathInvadersDetector() {
         if (deadInvader == 10) {
-            
             numLevel = 2;
             newLevel(2);
         }
         if (deadInvader == 30) {
-           
             numLevel = 3;
             newLevel(3);
         }
