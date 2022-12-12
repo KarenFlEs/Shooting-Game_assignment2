@@ -148,7 +148,18 @@ public class Ship extends Sprite {
      * The collision bounding region for the ship
      */
     private Circle hitBounds;
+    
+    protected static String rocketType; 
 
+    public String getRocketType() {
+        return this.rocketType;
+    }
+
+    public void setRocketType(String rocketType) {
+        this.rocketType = rocketType;
+    }
+
+    
     public Ship() {
         // Load one image.
         Image shipImage;
@@ -453,7 +464,7 @@ public class Ship extends Sprite {
         stopArea.setCenterY(screenY);
     }
 
-    public Missile fire(String rocketType) {
+    public Missile fire() {
         Missile fireMissile;
         
         float slowDownAmt = 0;
@@ -465,7 +476,7 @@ public class Ship extends Sprite {
         } 
         
         else {
-            fireMissile = new Missile(rocketType);
+            fireMissile = new Missile(getRocketType());
             scaleBeginningMissle = 8;
         }
 

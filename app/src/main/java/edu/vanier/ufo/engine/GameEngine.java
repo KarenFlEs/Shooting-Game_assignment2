@@ -57,6 +57,8 @@ public abstract class GameEngine {
     private final SpriteManager spriteManager;
 
     private final SoundManager soundManager;
+    
+    
 
     /**
      * Constructor that is called by the derived class. This will set the frames
