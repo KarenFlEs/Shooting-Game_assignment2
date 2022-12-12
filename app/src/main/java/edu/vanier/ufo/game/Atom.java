@@ -59,9 +59,7 @@ public class Atom extends Sprite {
         vX = vY = 0;
         Node currentNode = getNode();
         /* TODO: fix this code to add explosing effect*/
-      
         Sprite explosion = new Atom(ResourcesManager.EXPLOSION);  
-        
         explosion.getNode().setTranslateX(currentNode.getTranslateX()+vX);
         explosion.getNode().setTranslateY(currentNode.getTranslateY()+vY);
         gameWorld.getSceneNodes().getChildren().add(explosion.getNode());

@@ -453,8 +453,9 @@ public class Ship extends Sprite {
         stopArea.setCenterY(screenY);
     }
 
-    public Missile fire() {
+    public Missile fire(String rocketType) {
         Missile fireMissile;
+        
         float slowDownAmt = 0;
         int scaleBeginningMissle;
         if (KeyCode.DIGIT2 == keyCode) {
@@ -464,7 +465,7 @@ public class Ship extends Sprite {
         } 
         
         else {
-            fireMissile = new Missile(ResourcesManager.ROCKET_SMALL);
+            fireMissile = new Missile(rocketType);
             scaleBeginningMissle = 8;
         }
 

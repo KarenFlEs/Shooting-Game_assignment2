@@ -7,7 +7,6 @@ import javafx.scene.paint.Color;
  */
 public class Missile extends Atom {
 
- 
     public Missile(String imagePath) {        
         super(imagePath);
        

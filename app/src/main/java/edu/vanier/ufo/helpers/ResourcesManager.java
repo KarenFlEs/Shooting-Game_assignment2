@@ -30,6 +30,8 @@ public class ResourcesManager {
     // Rocket images
     public static final String ROCKET_SMALL = IMAGES_FOLDER + "rocket2.png";
     public static final String ROCKET_FIRE = IMAGES_FOLDER + "light-missile.png";
+    public static final String ROCKET_CROSS = IMAGES_FOLDER + "rocketGreen.png";
+    public static final String ROCKET_RED = IMAGES_FOLDER + "rocketRed.png";
 
     public static final String EXPLOSION = IMAGES_FOLDER + "explosion2.gif";
     

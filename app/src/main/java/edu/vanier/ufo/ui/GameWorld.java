@@ -53,6 +53,8 @@ public class GameWorld extends GameEngine {
     String explosionAudio = ""; 
     String laserAudio = ""; 
     
+    String rocketType = ""; 
+    
     int numLevel = 1;
     int score = 0;
     int deadInvader =0;
@@ -153,7 +155,7 @@ public class GameWorld extends GameEngine {
                 spaceShip.plotCourse(event.getX(), event.getY(), false);
 
                 // fire
-                Missile missile = spaceShip.fire();
+                Missile missile = spaceShip.fire(rocketType);
                 getSpriteManager().addSprites(missile);
 
                 // play sound
@@ -176,7 +178,7 @@ public class GameWorld extends GameEngine {
 
         // set up stats
         EventHandler changeWeapons = (EventHandler<KeyEvent>) (KeyEvent event) -> {
-            spaceShip.fire();
+            spaceShip.fire(rocketType);
             
             if (KeyCode.SPACE == event.getCode()) {
                 spaceShip.shieldToggle();
@@ -366,6 +368,7 @@ public class GameWorld extends GameEngine {
         if((spaceShip.lifeNumber != 0) ){
             if (level == 1){
                 updateLvlHud(1);
+                rocketType = ResourcesManager.ROCKET_SMALL; 
                 explosionAudio = "explosion"; 
                 laserAudio = "laser";
                 generateManySpheres(10,1.5);
@@ -375,6 +378,7 @@ public class GameWorld extends GameEngine {
                 spaceShip.getNode().setTranslateX(700);
                 spaceShip.getNode().setTranslateY(700);
                 updateLvlHud(2);
+                rocketType = ResourcesManager.ROCKET_CROSS; 
                 explosionAudio = "explosion2"; 
                 laserAudio = "laser2"; 
                 generateManySpheres(20,3.0);
@@ -385,6 +389,7 @@ public class GameWorld extends GameEngine {
                 spaceShip.getNode().setTranslateX(700);
                 spaceShip.getNode().setTranslateY(700);
                 updateLvlHud(3);
+                rocketType = ResourcesManager.ROCKET_RED; 
                 explosionAudio = "explosion3"; 
                 laserAudio = "laser3"; 
                 generateManySpheres(30,3.0);
