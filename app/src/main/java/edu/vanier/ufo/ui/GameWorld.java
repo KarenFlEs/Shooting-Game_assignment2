@@ -20,6 +20,51 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.util.Random;
+import javafx.animation.Timeline;
+import javafx.scene.image.ImageView;
+import javafx.animation.KeyFrame;
+import javafx.util.Duration;
+import javafx.scene.image.Image;
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import java.util.Random;
+import javafx.animation.KeyValue;
+import javafx.scene.image.ImageView;
+import javafx.animation.KeyFrame;
+import javafx.util.Duration;
+import javafx.scene.image.Image;
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import java.util.Random;
+import javafx.animation.Timeline;
+import javafx.scene.image.ImageView;
+import javafx.animation.KeyFrame;
+import javafx.util.Duration;
+import javafx.scene.image.Image;
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import java.util.Random;
 import javafx.scene.image.ImageView;
 
 /**
@@ -373,6 +418,7 @@ public class GameWorld extends GameEngine {
         
         if((spaceShip.lifeNumber != 0) ){
             if (level == 1){
+                //levelUp();
                 updateLvlHud(1);
                 spaceShip.setRocketType(ResourcesManager.ROCKET_SMALL);
                // rocketType = ResourcesManager.ROCKET_SMALL; 
@@ -430,7 +476,22 @@ public class GameWorld extends GameEngine {
             victory();
         }
     }
-    
+   
+    Timeline timeline;
+    public void levelUp(){
+     Image image1 = new Image("/images/levelUp.gif") ;
+      //  Image image2 = new Image("...")  ;
+      
+        ImageView imageView = new ImageView();
+      imageView.setTranslateX(400);
+      imageView.setTranslateX(200);
+       timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(imageView.imageProperty(), image1)),
+                new KeyFrame(Duration.seconds(3), new KeyValue(imageView.imageProperty(), null))
+                );
+        timeline.play();
+        getSceneNodes().getChildren().add(imageView);
+    }
      /**
      * How to handle the collision of two sprite objects. Stops the particle by
      * zeroing out the velocity if a collision occurred.
