@@ -32,7 +32,7 @@ public class ResourcesManager {
     private static final String ROCKETS_IMAGES_FOLDER = RESOURCES_FOLDER + "images/newRockets/";
     
     public static final String ROCKET_SMALL = ROCKETS_IMAGES_FOLDER + "rocket2.png";
-    public static final String ROCKET_FIRE = ROCKETS_IMAGES_FOLDER + "light-missile.png";
+    public static final String ROCKET_LIGHT = ROCKETS_IMAGES_FOLDER + "light-missile.png";
     public static final String ROCKET_CROSS = ROCKETS_IMAGES_FOLDER + "rocketGreen.png";
     public static final String ROCKET_RED = ROCKETS_IMAGES_FOLDER + "rocketRed.png";
 

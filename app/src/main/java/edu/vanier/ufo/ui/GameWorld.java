@@ -21,6 +21,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyValue;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
@@ -38,33 +40,33 @@ import javafx.scene.paint.ImagePattern;
 public class GameWorld extends GameEngine {
 
     // mouse pt label
-    Label mousePtLabel = new Label();
+    Label labelMousePt = new Label();
     // mouse press pt label
-    Label mousePressPtLabel = new Label();
+    Label labelMousePressPt = new Label();
     
     Ship spaceShip = new Ship();
     
     //hearts life
-    ImageView lifeView01 = new ImageView(new Image(ResourcesManager.SHIP_LIFE));;
-    ImageView lifeView02 = new ImageView(new Image(ResourcesManager.SHIP_LIFE));;
-    ImageView lifeView03 =  new ImageView(new Image(ResourcesManager.SHIP_LIFE));
+    ImageView imvLifeHeart1 = new ImageView(new Image(ResourcesManager.SHIP_LIFE));;
+    ImageView imvLifeHeart2 = new ImageView(new Image(ResourcesManager.SHIP_LIFE));;
+    ImageView imvLifeHeart3 =  new ImageView(new Image(ResourcesManager.SHIP_LIFE));
     
     //for game win or over
-    ImageView gameOver =  new ImageView(new Image(ResourcesManager.GAME_OVER));
-    ImageView gameWin =  new ImageView(new Image(ResourcesManager.GAME_WIN));
+    ImageView imvGameOver =  new ImageView(new Image(ResourcesManager.GAME_OVER));
+    ImageView imvGameWin =  new ImageView(new Image(ResourcesManager.GAME_WIN));
     
     //backgrounds
-    ImagePattern background1 = new ImagePattern(new Image(ResourcesManager.BACKGROUND_LEVEL1)); 
-    ImagePattern background2 = new ImagePattern(new Image(ResourcesManager.BACKGROUND_LEVEL2)); 
-    ImagePattern background3 = new ImagePattern(new Image(ResourcesManager.BACKGROUND_LEVEL3)); 
+    ImagePattern impBackground1 = new ImagePattern(new Image(ResourcesManager.BACKGROUND_LEVEL1)); 
+    ImagePattern impBackground2 = new ImagePattern(new Image(ResourcesManager.BACKGROUND_LEVEL2)); 
+    ImagePattern impBackground3 = new ImagePattern(new Image(ResourcesManager.BACKGROUND_LEVEL3)); 
     
     //labels 
-    Label lifeLabel = new Label();
-    Label levelLabel = new Label();
-    Label scoreLabel = new Label ();
+    //Label lifeLabel = new Label();
+    Label labelLevel = new Label();
+    Label labelScore = new Label ();
     
     VBox stats = new VBox();
-    Timeline timeline;
+    Timeline levelUpAnimation;
     
     //audios 
     String explosionAudio = ""; 
@@ -124,26 +126,26 @@ public class GameWorld extends GameEngine {
      
         getSceneNodes().getChildren().add(0, spaceShip.getNode());
         // mouse point
-        lifeView01.setFitHeight(50);
-        lifeView01.setFitWidth(50);
-        lifeView02.setFitHeight(50);
-        lifeView02.setFitWidth(50);
-        lifeView03.setFitHeight(50);
-        lifeView03.setFitWidth(50);
+        imvLifeHeart1.setFitHeight(50);
+        imvLifeHeart1.setFitWidth(50);
+        imvLifeHeart2.setFitHeight(50);
+        imvLifeHeart2.setFitWidth(50);
+        imvLifeHeart3.setFitHeight(50);
+        imvLifeHeart3.setFitWidth(50);
 
         HBox row1 = new HBox();
        
         HBox row2 = new HBox();
-        scoreLabel.setText("Score: " + score);
-        scoreLabel.setTextFill(Color.ALICEBLUE);
-        row2.getChildren().add(scoreLabel);
+        labelScore.setText("Score: " + score);
+        labelScore.setTextFill(Color.ALICEBLUE);
+        row2.getChildren().add(labelScore);
         
         HBox row3 = new HBox();
-        levelLabel.setTextFill(Color.ALICEBLUE);
-        levelLabel.setText("Level: " + numLevel);
+        labelLevel.setTextFill(Color.ALICEBLUE);
+        labelLevel.setText("Level: " + numLevel);
         
-        row3.getChildren().add(levelLabel);
-        row1.getChildren().addAll(lifeView01, lifeView02, lifeView03);
+        row3.getChildren().add(labelLevel);
+        row1.getChildren().addAll(imvLifeHeart1, imvLifeHeart2, imvLifeHeart3);
         stats.getChildren().addAll(row2,row3,row1);
      
        //TODO: Add the HUD here.
@@ -156,7 +158,6 @@ public class GameWorld extends GameEngine {
         getSoundManager().loadSoundEffects("explosion", getClass().getClassLoader().getResource(ResourcesManager.SOUND_EXPLOSION));
         getSoundManager().loadSoundEffects("explosion2", getClass().getClassLoader().getResource(ResourcesManager.SOUND_EXPLOSION2));
         getSoundManager().loadSoundEffects("explosion3", getClass().getClassLoader().getResource(ResourcesManager.SOUND_EXPLOSION3));
-        
     }
 
     /**
@@ -169,7 +170,7 @@ public class GameWorld extends GameEngine {
         System.out.println("Ship's center is (" + spaceShip.getCenterX() + ", " + spaceShip.getCenterY() + ")");
 
         EventHandler fireOrMove = (EventHandler<MouseEvent>) (MouseEvent event) -> {
-            mousePressPtLabel.setText("Mouse Press PT = (" + event.getX() + ", " + event.getY() + ")");
+            labelMousePressPt.setText("Mouse Press PT = (" + event.getX() + ", " + event.getY() + ")");
             if (event.getButton() == MouseButton.PRIMARY) {
                 // Aim
                 spaceShip.plotCourse(event.getX(), event.getY(), false);
@@ -258,7 +259,7 @@ public class GameWorld extends GameEngine {
 
         // set up stats
         EventHandler showMouseMove = (EventHandler<MouseEvent>) (MouseEvent event) -> {
-            mousePtLabel.setText("Mouse PT = (" + event.getX() + ", " + event.getY() + ")");
+            labelMousePt.setText("Mouse PT = (" + event.getX() + ", " + event.getY() + ")");
         };
 
         primaryStage.getScene().setOnMouseMoved(showMouseMove);
@@ -396,7 +397,7 @@ public class GameWorld extends GameEngine {
      * @param value 
      */
     public void updateLvlHud(int value){
-        levelLabel.setText("Level: " + value);
+        labelLevel.setText("Level: " + value);
     }
     
     /**
@@ -404,7 +405,7 @@ public class GameWorld extends GameEngine {
      * @param value 
      */
     public void updateScore(int value){
-         scoreLabel.setText("Score: " + score);
+         labelScore.setText("Score: " + score);
     }
     
     /**
@@ -417,22 +418,22 @@ public class GameWorld extends GameEngine {
         imageView.setFitHeight(100);
         imageView.setFitWidth(180);
         
-        timeline = new Timeline(
+        levelUpAnimation = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(imageView.imageProperty(), levelUp)),
                 new KeyFrame(Duration.seconds(3), new KeyValue(imageView.imageProperty(), null))
         );
-        timeline.play();
+        levelUpAnimation.play();
         getSceneNodes().getChildren().add(imageView);
     }
     
     /**
-     * Adds the required elements according to eache level 
+     * Adds the required elements according to each level 
      * @param level (an int)
      */
     public void newLevel(int level){
         if((spaceShip.lifeNumber != 0) ){
             if (level == 1){
-                getGameSurface().setFill(background1);
+                getGameSurface().setFill(impBackground1);
                 updateLvlHud(1);
                 spaceShip.setRocketType(ResourcesManager.ROCKET_SMALL);
                 explosionAudio = "explosion"; 
@@ -441,7 +442,7 @@ public class GameWorld extends GameEngine {
             }
 
             if (level == 2){
-                getGameSurface().setFill(background2);
+                getGameSurface().setFill(impBackground2);
                 levelUp();
                 spaceShip.getNode().setTranslateX(700);
                 spaceShip.getNode().setTranslateY(700);
@@ -454,7 +455,7 @@ public class GameWorld extends GameEngine {
             }
 
             if (level == 3){
-                getGameSurface().setFill(background3);
+                getGameSurface().setFill(impBackground3);
                 levelUp();
                 spaceShip.getNode().setTranslateX(700);
                 spaceShip.getNode().setTranslateY(700);
@@ -469,13 +470,13 @@ public class GameWorld extends GameEngine {
     }
     
     /**
-     * Adds the win animations
+     * Adds the win animation
      */
     public void victory(){
-            gameWin.setFitWidth(700);
-            gameWin.setTranslateX(400);
-            gameWin.setTranslateY(200);
-            getSceneNodes().getChildren().add(gameWin);  
+            imvGameWin.setFitWidth(700);
+            imvGameWin.setTranslateX(400);
+            imvGameWin.setTranslateY(200);
+            getSceneNodes().getChildren().add(imvGameWin);  
     }
     
     /**
@@ -511,29 +512,30 @@ public class GameWorld extends GameEngine {
        if (spriteA != spriteB) {
             if (spriteA.collide(spriteB)) {
 
-                if ((spriteA != spaceShip) && !(spriteB instanceof Atom ) && (spaceShip.isShieldOn()==false) ) {
+                if ((spriteA != spaceShip) && !(spriteB instanceof Atom ) && (!
+                        spaceShip.isShieldOn()) ) {
                     //The ship looses a life when it collides with an invader
                     spriteA.handleDeath(this);
                     spaceShip.lifeNumber--;
                    
                     if (spaceShip.lifeNumber == 2) {
-                    lifeView03.imageProperty().set(null);
+                    imvLifeHeart3.imageProperty().set(null);
                     deadInvader++;
                     deathInvadersDetector(); 
                     }
                     if (spaceShip.lifeNumber == 1) {
-                    lifeView02.imageProperty().set(null);
+                    imvLifeHeart2.imageProperty().set(null);
                     deadInvader++;
                     deathInvadersDetector(); 
                     }
                     if (spaceShip.lifeNumber == 0) {
                     spriteB.handleDeath(this);
-                    lifeView01.imageProperty().set(null);
-                    gameOver.setTranslateX(500);
-                    gameOver.setTranslateY(200);
+                    imvLifeHeart1.imageProperty().set(null);
+                    imvGameOver.setTranslateX(500);
+                    imvGameOver.setTranslateY(200);
                   
                     getSceneNodes().getChildren().clear();
-                    getSceneNodes().getChildren().add(gameOver);
+                    getSceneNodes().getChildren().add(imvGameOver);
                     }
                     
                 } 

@@ -25,11 +25,11 @@ public class Atom extends Sprite {
      * @param imagePath the path of the image to be embedded in the node object.
      */
     public Atom(String imagePath) {
-        ImageView newAtom = new ImageView();
-        Image shipImage = new Image(imagePath, true);        
-        newAtom.setImage(shipImage);        
-        this.node = newAtom;
-        this.collidingNode = newAtom;
+        ImageView imvNewAtom = new ImageView();
+        Image imageShip = new Image(imagePath, true);        
+        imvNewAtom.setImage(imageShip);        
+        this.node = imvNewAtom;
+        this.collidingNode = imvNewAtom;
     }
 
     /**
@@ -64,14 +64,14 @@ public class Atom extends Sprite {
         explosion.getNode().setTranslateY(currentNode.getTranslateY()+vY);
         gameWorld.getSceneNodes().getChildren().add(explosion.getNode());
         
-        FadeTransition ft = new FadeTransition(Duration.millis(300), currentNode);
-        ft.setFromValue(vX);
-        ft.setToValue(0);
-        ft.setOnFinished((ActionEvent event) -> {
+        FadeTransition ftExplosion = new FadeTransition(Duration.millis(300), currentNode);
+        ftExplosion.setFromValue(vX);
+        ftExplosion.setToValue(0);
+        ftExplosion.setOnFinished((ActionEvent event) -> {
             isDead = true;
             gameWorld.getSceneNodes().getChildren().removeAll(currentNode, explosion.getNode());
         });
-        ft.play();
+        ftExplosion.play();
     }
 
     /**

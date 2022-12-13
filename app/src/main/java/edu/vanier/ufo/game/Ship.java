@@ -170,8 +170,8 @@ public class Ship extends Sprite {
      */
     public Ship() {
         // Load one image.
-        Image shipImage;
-        shipImage = new Image(ResourcesManager.SPACE_STAR_SHIP, true);
+        Image imageShip;
+        imageShip = new Image(ResourcesManager.SPACE_STAR_SHIP, true);
      
         stopArea.setRadius(40);
         stopArea.setStroke(Color.ORANGE);
@@ -181,7 +181,7 @@ public class Ship extends Sprite {
         // create all the number of directions based on a unit angle. 360 divided by NUM_DIRECTIONS
         for (int i = 0; i < NUM_DIRECTIONS; i++) {
             RotatedShipImage imageView = new RotatedShipImage();
-            imageView.setImage(shipImage);
+            imageView.setImage(imageShip);
             imageView.setRotate(-1 * i * UNIT_ANGLE_PER_FRAME);
             imageView.setCache(true);
             imageView.setCacheHint(CacheHint.SPEED);
@@ -485,7 +485,7 @@ public class Ship extends Sprite {
         float slowDownAmt = 0;
         int scaleBeginningMissle;
         if (KeyCode.DIGIT2 == keyCode) {
-            fireMissile = new Missile(ResourcesManager.ROCKET_FIRE);
+            fireMissile = new Missile(ResourcesManager.ROCKET_LIGHT);
             slowDownAmt = 1.3f;
             scaleBeginningMissle = 11;
         } 
