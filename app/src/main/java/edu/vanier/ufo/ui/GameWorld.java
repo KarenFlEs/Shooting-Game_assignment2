@@ -415,7 +415,7 @@ public class GameWorld extends GameEngine {
         ImageView imageView = new ImageView();
         imageView.setTranslateY(100);
         imageView.setFitHeight(100);
-        imageView.setFitWidth(100);
+        imageView.setFitWidth(180);
         
         timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(imageView.imageProperty(), levelUp)),
