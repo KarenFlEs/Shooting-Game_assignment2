@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import java.util.Random;
 import javafx.animation.KeyValue;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
 
 /**
  * This is a simple game world simulating a bunch of spheres looking like atomic
@@ -43,18 +44,29 @@ public class GameWorld extends GameEngine {
     
     Ship spaceShip = new Ship();
     
+    //hearts life
     ImageView lifeView01 = new ImageView(new Image(ResourcesManager.SHIP_LIFE));;
     ImageView lifeView02 = new ImageView(new Image(ResourcesManager.SHIP_LIFE));;
     ImageView lifeView03 =  new ImageView(new Image(ResourcesManager.SHIP_LIFE));
     
+    //for game win or over
     ImageView gameOver =  new ImageView(new Image(ResourcesManager.GAME_OVER));
     ImageView gameWin =  new ImageView(new Image(ResourcesManager.GAME_WIN));
+    
+    //backgrounds
+    ImagePattern background1 = new ImagePattern(new Image(ResourcesManager.BACKGROUND_LEVEL1)); 
+    ImagePattern background2 = new ImagePattern(new Image(ResourcesManager.BACKGROUND_LEVEL2)); 
+    ImagePattern background3 = new ImagePattern(new Image(ResourcesManager.BACKGROUND_LEVEL3)); 
+    
+    //labels 
     Label lifeLabel = new Label();
     Label levelLabel = new Label();
     Label scoreLabel = new Label ();
+    
     VBox stats = new VBox();
     Timeline timeline;
     
+    //audios 
     String explosionAudio = ""; 
     String laserAudio = ""; 
     
@@ -109,7 +121,6 @@ public class GameWorld extends GameEngine {
         // Create a button to freeze the game loop.
         //final Timeline gameLoop = getGameLoop();
         getSpriteManager().addSprites(spaceShip);
-        
      
         getSceneNodes().getChildren().add(0, spaceShip.getNode());
         // mouse point
@@ -421,6 +432,7 @@ public class GameWorld extends GameEngine {
     public void newLevel(int level){
         if((spaceShip.lifeNumber != 0) ){
             if (level == 1){
+                getGameSurface().setFill(background1);
                 updateLvlHud(1);
                 spaceShip.setRocketType(ResourcesManager.ROCKET_SMALL);
                 explosionAudio = "explosion"; 
@@ -429,6 +441,7 @@ public class GameWorld extends GameEngine {
             }
 
             if (level == 2){
+                getGameSurface().setFill(background2);
                 levelUp();
                 spaceShip.getNode().setTranslateX(700);
                 spaceShip.getNode().setTranslateY(700);
@@ -441,6 +454,7 @@ public class GameWorld extends GameEngine {
             }
 
             if (level == 3){
+                getGameSurface().setFill(background3);
                 levelUp();
                 spaceShip.getNode().setTranslateX(700);
                 spaceShip.getNode().setTranslateY(700);

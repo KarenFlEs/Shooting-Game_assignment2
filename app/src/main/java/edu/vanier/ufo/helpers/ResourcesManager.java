@@ -45,6 +45,11 @@ public class ResourcesManager {
     public static final String GAME_OVER = OTHER_IMAGES_FOLDER + "game_over.gif";
     public static final String GAME_WIN = OTHER_IMAGES_FOLDER + "win_display.png";
     
+    //--- background images 
+    public static final String BACKGROUND_LEVEL1 = OTHER_IMAGES_FOLDER + "spaceBackground1.jpg";
+    public static final String BACKGROUND_LEVEL2 = OTHER_IMAGES_FOLDER + "spaceBackground2.jpg";
+    public static final String BACKGROUND_LEVEL3 = OTHER_IMAGES_FOLDER + "spaceBackground3.jpg";
+    
     // Invader sprites.
     private static final String NEWINVADERS_IMAGES_FOLDER = RESOURCES_FOLDER + "images/newInvaders/";
     
