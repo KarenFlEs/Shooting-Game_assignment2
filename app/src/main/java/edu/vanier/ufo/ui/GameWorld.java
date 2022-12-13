@@ -163,10 +163,14 @@ public class GameWorld extends GameEngine {
                 // Aim
                 spaceShip.plotCourse(event.getX(), event.getY(), false);
 
+                // play sound
+                getSoundManager().playSound(laserAudio);
+                
                 // fire
                 Missile missile = spaceShip.fire();
                 getSpriteManager().addSprites(missile);
                 getSceneNodes().getChildren().add(0, missile.getNode());
+                
                 
                 if(numLevel == 2){
                 Missile missileB = spaceShip.fire(); 
@@ -186,9 +190,6 @@ public class GameWorld extends GameEngine {
                 getSceneNodes().getChildren().add(2, missileC.getNode());
                 }
                 
-                // play sound
-                getSoundManager().playSound(laserAudio);
-          
 
             } else if (event.getButton() == MouseButton.SECONDARY) {
                 // determine when all atoms are not on the game surface. Ship should be one sprite left.
