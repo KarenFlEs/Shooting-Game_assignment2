@@ -21,8 +21,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.KeyValue;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
