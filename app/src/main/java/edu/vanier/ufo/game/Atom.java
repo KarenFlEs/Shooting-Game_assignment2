@@ -58,13 +58,10 @@ public class Atom extends Sprite {
     public void implode(final GameEngine gameWorld) {
         vX = vY = 0;
         Node currentNode = getNode();
-        /* TODO: fix this code to add explosing effect*/
-        
+        /* TODO: The explosing effect added*/
         Sprite explosion = new Atom(ResourcesManager.EXPLOSION);  
         explosion.getNode().setTranslateX(currentNode.getTranslateX()+vX);
         explosion.getNode().setTranslateY(currentNode.getTranslateY()+vY);
-       
-        
         gameWorld.getSceneNodes().getChildren().add(explosion.getNode());
         
         FadeTransition ft = new FadeTransition(Duration.millis(300), currentNode);
@@ -77,6 +74,10 @@ public class Atom extends Sprite {
         ft.play();
     }
 
+    /**
+     * Handle the death calling the implode(GameEngine) method 
+     * @param gameWorld 
+     */
     @Override
     public void handleDeath(GameEngine gameWorld) {
         implode(gameWorld);

@@ -15,7 +15,6 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.event.EventHandler;
 
 /**
  * A spaceship with 32 directions When two atoms collide each will fade and
@@ -166,7 +165,9 @@ public class Ship extends Sprite {
         this.rocketType = rocketType;
     }
 
-    
+    /**
+     * The constructor of this class (Ship)
+     */
     public Ship() {
         // Load one image.
         Image shipImage;
@@ -199,13 +200,13 @@ public class Ship extends Sprite {
         RotatedShipImage firstShip = directionalShips.get(0);
         firstShip.setPrevRotatedImage(prev);
         prev.setNextRotatedImage(firstShip);
+        
         // set javafx node to an image
         firstShip.setVisible(true);
         setNode(flipBook);
-       flipBook.setTranslateX(700);
-       flipBook.setTranslateY(700);
-       
-        
+        flipBook.setTranslateX(700);
+        flipBook.setTranslateY(700);
+
         flipBook.setCache(true);
         flipBook.setCacheHint(CacheHint.SPEED);
         flipBook.setManaged(false);
@@ -406,6 +407,9 @@ public class Ship extends Sprite {
         u = v;
     }
 
+    /**
+     * Rotates the ship according to the required direction
+     */
     private void turnShip() {
 
         final Duration oneFrameAmt = Duration.millis(MILLIS_PER_FRAME);
@@ -471,6 +475,10 @@ public class Ship extends Sprite {
         stopArea.setCenterY(screenY);
     }
 
+    /**
+     * The method in which fires the according rocket 
+     * @return 
+     */
     public Missile fire() {
         Missile fireMissile;
         
@@ -510,6 +518,9 @@ public class Ship extends Sprite {
         this.keyCode = keyCode;
     }
 
+    /**
+     * Creates a shield that protects the invaders from dying 
+     */
     public void shieldToggle() {
         if (shield == null) {
             RotatedShipImage shipImage = getCurrentShipImage();
@@ -520,7 +531,7 @@ public class Ship extends Sprite {
             shield = new Circle();
             shield.setRadius(65);
             shield.setStrokeWidth(10);
-            shield.setStroke(Color.WHITESMOKE);
+            shield.setStroke(Color.PINK);
             shield.setCenterX(x);
             shield.setCenterY(y);
             shield.setOpacity(.70);

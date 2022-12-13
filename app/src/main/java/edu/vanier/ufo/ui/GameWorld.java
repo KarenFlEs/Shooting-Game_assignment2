@@ -32,6 +32,7 @@ import javafx.scene.image.ImageView;
  * left click to fire weapon to atoms.
  *
  * @author cdea
+ * 
  */
 public class GameWorld extends GameEngine {
 
@@ -61,6 +62,11 @@ public class GameWorld extends GameEngine {
     int score = 0;
     int deadInvader =0;
 
+    /**
+     * The constructor of the class Gameworld with the following parameters 
+     * @param fps
+     * @param title 
+     */
     public GameWorld(int fps, String title) {
         super(fps, title);
     }
@@ -208,6 +214,7 @@ public class GameWorld extends GameEngine {
             
             spaceShip.changeWeapon(event.getCode());
             
+            //The WASD keys for movement
             if(null!=event.getCode())
                 switch (event.getCode()) {
                 case W -> {
@@ -300,7 +307,6 @@ public class GameWorld extends GameEngine {
 
             // add sprite's 
             getSceneNodes().getChildren().add(atom.getNode());
-        
         }
     }
 
@@ -328,7 +334,7 @@ public class GameWorld extends GameEngine {
      */
     private void bounceOffWalls(Sprite sprite) {
         // bounce off the walls when outside of boundaries
-        //FIXME: The ship movement has got issues.
+        //FIXME: The ship movement has got issues.  --> Resolved
         Node displayNode;
         if (sprite instanceof Ship) {
             displayNode = sprite.getNode();//((Ship)sprite).getCurrentShipImage();
@@ -372,15 +378,26 @@ public class GameWorld extends GameEngine {
             getSceneNodes().getChildren().remove(missile.getNode());
         }
     }
-    
+   
+    /**
+     * Updates the level label
+     * @param value 
+     */
     public void updateLvlHud(int value){
         levelLabel.setText("Level: " + value);
     }
     
+    /**
+     * Updates the score label
+     * @param value 
+     */
     public void updateScore(int value){
          scoreLabel.setText("Score: " + score);
     }
     
+    /**
+     * Add the level up gif 
+     */
     public void levelUp(){
         Image levelUp = new Image(ResourcesManager.LEVEL_UP);
         ImageView imageView = new ImageView();
@@ -396,8 +413,11 @@ public class GameWorld extends GameEngine {
         getSceneNodes().getChildren().add(imageView);
     }
     
+    /**
+     * Adds the required elements according to eache level 
+     * @param level (an int)
+     */
     public void newLevel(int level){
-        
         if((spaceShip.lifeNumber != 0) ){
             if (level == 1){
                 updateLvlHud(1);
@@ -433,6 +453,9 @@ public class GameWorld extends GameEngine {
         }
     }
     
+    /**
+     * Adds the win animations
+     */
     public void victory(){
             gameWin.setFitWidth(700);
             gameWin.setTranslateX(400);
@@ -440,6 +463,9 @@ public class GameWorld extends GameEngine {
             getSceneNodes().getChildren().add(gameWin);  
     }
     
+    /**
+     * The level changes according to the number of dead invaders 
+     */
     public void deathInvadersDetector() {
         if (deadInvader == 10) {
             numLevel = 2;
@@ -453,7 +479,6 @@ public class GameWorld extends GameEngine {
             victory();
         }
     }
-   
     
     
      /**
@@ -472,6 +497,7 @@ public class GameWorld extends GameEngine {
             if (spriteA.collide(spriteB)) {
 
                 if ((spriteA != spaceShip) && !(spriteB instanceof Atom ) && (spaceShip.isShieldOn()==false) ) {
+                    //The ship looses a life when it collides with an invader
                     spriteA.handleDeath(this);
                     spaceShip.lifeNumber--;
                    
@@ -493,12 +519,12 @@ public class GameWorld extends GameEngine {
                   
                     getSceneNodes().getChildren().clear();
                     getSceneNodes().getChildren().add(gameOver);
-                   
                     }
                     
                 } 
                 
                 else if (spriteB != spaceShip && (spriteA instanceof Atom ) ) {
+                    //When the ship's rocket collides with a missile
                     if((spaceShip.lifeNumber != 0) ){
                         if (spriteB instanceof Missile ) {
                             deadInvader++;
@@ -511,7 +537,6 @@ public class GameWorld extends GameEngine {
                     }
                
                 }
-               // System.out.println(deadInvader);
                 return true; 
             }
        }

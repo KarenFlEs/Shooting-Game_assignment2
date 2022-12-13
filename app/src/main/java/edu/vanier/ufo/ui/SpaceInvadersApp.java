@@ -7,7 +7,7 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 
 /**
- * @author Karen & Koosoom 
+ * @author Karen Florian & Koosoom Sookraj
  */
 
 /**

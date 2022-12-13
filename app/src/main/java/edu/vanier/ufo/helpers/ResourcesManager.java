@@ -36,7 +36,7 @@ public class ResourcesManager {
     public static final String ROCKET_CROSS = ROCKETS_IMAGES_FOLDER + "rocketGreen.png";
     public static final String ROCKET_RED = ROCKETS_IMAGES_FOLDER + "rocketRed.png";
 
-    //explosion + others
+    //explosion + others 
     private static final String OTHER_IMAGES_FOLDER = RESOURCES_FOLDER + "images/OtherImages/";
     
     public static final String EXPLOSION = OTHER_IMAGES_FOLDER + "explosion2.gif";
@@ -69,30 +69,28 @@ public class ResourcesManager {
     public static final String SOUND_LEVELUP = SOUNDS_FOLDER + "Level2.wav";    
     
     public static final String[] INVADER_SPRITES_PATH = {			
-			//INVADER_UFO, INVADER_CHICKEN, INVADER_BEE,INVADER_SCI_FI
                         INVADER_UFO_GREEN, INVADER_UFO_PINK, INVADER_JELLYMONSTER,INVADER_YELLOW_MONSTER, INVADER_GREEN_MONSTER
 	};
 
-//    public static final String ROCKET_SMALL = IMAGES_FOLDER + "rocket.png";
+    /**
+     * Stores the invaders path in a Hashmap
+     * @return HashMap<Integer, String> 
+     */
     public static HashMap<Integer, String> getInvaderSprites() {
         HashMap<Integer, String> invaders = new HashMap<Integer, String>();
-        
-      //  List <String> fileNames = new ArrayList<> ();
         
         for (int i = 0; i < INVADER_SPRITES_PATH.length; i++){
             invaders.put(i, INVADER_SPRITES_PATH [i]);
         }
         
-       // invaders.put(1, ResourcesManager.NEWINVADERS_IMAGES_FOLDER + "large_invader_b.png");
-       // invaders.put(2, ResourcesManager.NEWINVADERS_IMAGES_FOLDER + "small_invader_b.png");
         return invaders;
     }
     
     /**
-     * 
+     * The method gets the paths of the sprites 
      * @param folderPath
      * @param fileExtension
-     * @return 
+     * @return List<String> 
      */
     public static List<String> getPathsOfSprites (String folderPath, String fileExtension){
         List <String> fileNames = new ArrayList<> ();
@@ -116,8 +114,6 @@ public class ResourcesManager {
         }catch (Exception e){
             System.err.println(e.getMessage());
         }
-    
-        System.out.println(fileNames);
         
         return fileNames; 
     }

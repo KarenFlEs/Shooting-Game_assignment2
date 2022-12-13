@@ -77,7 +77,6 @@ public abstract class Sprite {
         //return s.getBoundary().intersects(this.getBoundary());        
         Bounds sBounds = s.getNode().localToScene(s.getNode().getBoundsInLocal());
         return node.intersects(sBounds);
-
     }
 
     public Image getImage() {

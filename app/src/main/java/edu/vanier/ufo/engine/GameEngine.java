@@ -1,8 +1,5 @@
 package edu.vanier.ufo.engine;
 
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
